@@ -879,6 +879,10 @@ AirGO()
                         llSend("CAMARASENSOR");
                     }
                 }
+                else if(CA!=7)
+                {
+                    CA=0;
+                }
             }
             else if(~llListFindList(LR5,(list)region))
             {
@@ -914,10 +918,10 @@ AirGO()
                     ProLAVA(posregion5XXX,0.8,MAXDISTANCE2+0.05);
                     if((finalmeta==ZERO_VECTOR))
                     {
-                        CA=500;
                         llTargetOmega(<0.1,0.0,0.0>,TWO_PI,0.1);
                         //llOwnerSay(xD+" "+oskwk);
-                        llSend(("CAMARASENSOR"));
+                        llSend("CSASENSOR2");
+                        CA=500;
                     }
                 }
                 else if(CA==500)

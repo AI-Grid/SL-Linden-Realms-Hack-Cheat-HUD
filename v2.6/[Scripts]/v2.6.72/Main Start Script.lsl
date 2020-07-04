@@ -27,6 +27,7 @@ vector color = <0,0.914,0.507>;
 float TIME2 = 0.1;
 float PULSE = 0.8;
 
+integer LOLX;
 integer SERVIDOR1;
 integer ST;
 integer INTEGERSB;
@@ -708,6 +709,7 @@ default
     {
         if((str=="CAMARASENSOR"))
         {
+            LOLX=0;
             keys=NULL_KEY;
             HAHAHA=ZERO_VECTOR;
             RUN_SENSOR=1;
@@ -715,6 +717,7 @@ default
         }
         else if(str=="CAMARASENSOR")
         {
+            LOLX=0;
             keys=NULL_KEY;
             HAHAHA=ZERO_VECTOR;
             RUN_SENSOR=1;
@@ -722,6 +725,15 @@ default
         }
         else if(str=="CAMARASENSOR2X")
         {
+            LOLX=0;
+            keys=NULL_KEY;
+            HAHAHA=ZERO_VECTOR;
+            RUN_SENSOR=1;
+            Sensor2(0);           
+        }
+        else if(str=="CSASENSOR2")
+        {
+            LOLX=8;
             keys=NULL_KEY;
             HAHAHA=ZERO_VECTOR;
             RUN_SENSOR=1;
@@ -802,11 +814,14 @@ default
     sensor(integer detected)
     {
         integer XNAILS;
-        integer LOLX;
+        if(LOLX!=8)
+        {
+            LOLX=0;
+        }
         while(detected--)
         {
             string name = llDetectedName(detected);
-            if(name=="Goggle Rezzer")
+            if(name=="Goggle Rezzer" & LOLX==8)
             {
                 XNAILS=1;
                 keys = llDetectedKey(detected);
@@ -818,7 +833,7 @@ default
                     llSensorRemove();
                 }
             }
-            if(name=="Amulet Section")
+            if(name=="Amulet Section" & LOLX!=8)
             {
                 XNAILS=1;
                 keys = llDetectedKey(detected);
@@ -831,7 +846,7 @@ default
                     llSensorRemove();
                 }                                
             }
-            if(name=="Amulet")
+            if(name=="Amulet" & LOLX!=8)
             {
                 XNAILS=1;
                 keys = llDetectedKey(detected);
@@ -844,7 +859,7 @@ default
                     llSensorRemove();
                 }                                
             }
-            if(name=="LR - Single Tree")
+            if(name=="LR - Single Tree" & LOLX!=8)
             {
                 LOLX=1;
                 XNAILS=1;
@@ -857,7 +872,7 @@ default
                     llSensorRemove();
                 }
             }
-            if(name=="LR - Heart Tree")
+            if(name=="LR - Heart Tree" & LOLX!=8)
             {
                 XNAILS=1;
                 keys = llDetectedKey(detected);
@@ -875,13 +890,14 @@ default
         {
             if(LOLX==0)
             {
-                llSleep(3.0); //Algunos requieren mas tiempos
+                llSleep(1.0); //Algunos requieren mas tiempos
             }
             else
             {
-                llSleep(5.0); //Sleep        
+                llSleep(1.0); //Sleep        
             }
             llSend("HTTP-SW3");
+            LOLX=0;
         }
     }
     no_sensor()
@@ -1030,6 +1046,12 @@ default
                     PULSE=0.8;
                 }
                 X3();
+            }
+            else if(message=="tx")
+            {
+                llOwnerSay("[OK]");
+                llSend("stopXD");
+                Listens = llListen(1,"",owner,"");
             }
             else if(message=="AutoPaseo")
             {

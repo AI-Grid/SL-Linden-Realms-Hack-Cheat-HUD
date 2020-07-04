@@ -32,7 +32,7 @@
     //si le hago click varias veces con el programa o manual debe cambiar de region con un aviso y delay, lo mismo para todos
     //Lo mismo en el teleport de cancelar//desde el hud enviarle request hack3 ya que llRlVATeleport es lo que lo provoca y no tomar fotitos e compararlas//Presionar enter si esta en la misma ventana para quitar el mensaje//programa para quitar el mensaje detector ese de teleporte //https://answers.opencv.org/question/175646/comparing-two-image/ // http://opencv-tutorials-hub.blogspot.com/ // https://stackoverflow.com/questions/3291167/how-can-i-take-a-screenshot-in-a-windows-application
 
-//detectar diamantes, dejar una camara enfocando los diamantes y deciendo el http request // agregar una variable al menu como c.chack pero otra
+    //detectar diamantes, dejar una camara enfocando los diamantes y deciendo el http request // agregar una variable al menu como c.chack pero otra
 //si una roca me atrapa y le habia dado a el boton listo tengo que darle de vuelta
 -deprecated//DESIERTO CAJA si desaparece al  no clickearla , buscar de vuelta
 //inizializar el hud con las cuentas en un orden, el avatar debe estar invisible, el hud puesto el mas reciente, (archivos arduino)
