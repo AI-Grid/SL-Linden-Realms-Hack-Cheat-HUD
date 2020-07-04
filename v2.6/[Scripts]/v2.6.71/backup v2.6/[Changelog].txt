@@ -1,0 +1,49 @@
+ -------------- Por crear o hacer
+|
+|   ----------- Por revisar ya que estan creados y ya hechos
+|   |
+|   |   ------- Terminados
+|   |   |
+        //mucho sleep en el coso de desert quest
+        //como que en los 4900 o +5000 metros de altura no funciona el deadly mist
+        //El ctrl+x automatico para oscurecer al recolectar diamantes no se setea
+        //Cuando estoy en otra region y vuelvo a listo desps de recolar diamantes a veces no me lleva al arbol wtf
+        //Elevar altura trayecto mision 4
+        //Remove algunas posiciones
+        //Velocidad en algunos puntos
+        //Desactivar hack3.lsl en mision 4
+        //por ahi te pide que pases de vuelta en la hoja sera un delay en el aire quizas para pasar de vuelta // mision 1
+        //pasar mejor contra la hoja en el desierto, a veces no la toma la tocarla // mision 2
+        //los googles asegurarse mejor de quitarlo supongo?
+        //la mision 4 es muy fragil, no es estable para hacerla debe mejorar usando if o radar
+        //reducir sleep y velocidad en la mision 4 del volcan, reparar bugs en caso de este
+    //al ir cerca para retirar los lindens detectar si hay una persona cerca del mismo y esperar y cuando salga ir ahi
+        //al estar listo en la mision 4 debe pasar con la hoja el avatar sin colisionar con la roca
+        //Dejar ya listo cuando clickear un llownersay diciendo http request
+        //detectar totalmente mas rapido las cajas de la mision 2 del desierto e 
+        //disminuir velocidad para ir a la lava
+        //pasar mas veces con la hoja de la mision 3, siempre lo mismo , o velocidad mas lenta, altura?
+        //al resetear el script en la mision 3 agregar posicion al aire
+        //quedarse quieto en esas cajas al detectar una, 
+        //reparar cuando voy a la mision 3, no arranco el de mision 3 al buscar al amuleto el viaje y la hoja la paso 1 vez
+
+//a veces no se paraba al sentarme en la roca de la lava
+//detectar diamantes, dejar una camara enfocando los diamantes y deciendo el http request // agregar una variable al menu como c.chack pero otra
+//http request click a el programa
+//si una roca me atrapa y le habia dado a el boton listo tengo que darle de vuelta
+//DESIERTO CAJA si desaparece al  no clickearla , buscar de vuelta
+//si le hago click varias veces con el programa o manual debe cambiar de region con un aviso y delay, lo mismo para todos
+//Lo mismo en el teleport de cancelar//desde el hud enviarle request hack3 ya que llRlVATeleport es lo que lo provoca y no tomar fotitos e compararlas//Presionar enter si esta en la misma ventana para quitar el mensaje//programa para quitar el mensaje detector ese de teleporte //https://answers.opencv.org/question/175646/comparing-two-image/ // http://opencv-tutorials-hub.blogspot.com/ // https://stackoverflow.com/questions/3291167/how-can-i-take-a-screenshot-in-a-windows-application
+//inizializar el hud con las cuentas en un orden, el avatar debe estar invisible, el hud puesto el mas reciente, (archivos arduino)
+//Debe seleccionar la misma mision que se quedo y debe bloquear el linden realms para no entrar de vuelta//si pasa mucho tiempo sin el request del click resetear el hud, si se reseteo varias veces el hud cambiar de region, esto hace el buen dinero automatico
+
+
+
+        /* POSICIONES para ir al piso de otro camino
+        [13:40] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <203.71350, 11.27425, 100.06907>,
+        [13:40] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <203.71350, 11.27425, 60.06907>,
+        [13:36] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <221.84660, 57.79192, 53.77404>,
+        [13:36] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <187.07770, 87.74104, 53.49061>,
+        [13:35] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <151.45830, 88.31565, 57.68225>,
+        [13:35] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <146.49820, 92.64310, 62.37995>,
+        */

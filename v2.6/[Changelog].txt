@@ -1,0 +1,101 @@
+ -------------- Por crear o hacer
+|
+|   ----------- Por revisar ya que estan creados y ya hechos
+|   |
+|   |   ------- Terminados
+|   |   |
+        //mucho sleep en el coso de desert quest
+        //como que en los 4900 o +5000 metros de altura no funciona el deadly mist
+        //El ctrl+x automatico para oscurecer al recolectar diamantes no se setea
+        //Cuando estoy en otra region y vuelvo a listo desps de recolar diamantes a veces no me lleva al arbol wtf
+        //Elevar altura trayecto mision 4
+        //Remove algunas posiciones
+        //Velocidad en algunos puntos
+        //Desactivar hack3.lsl en mision 4
+        //por ahi te pide que pases de vuelta en la hoja sera un delay en el aire quizas para pasar de vuelta // mision 1
+        //pasar mejor contra la hoja en el desierto, a veces no la toma la tocarla // mision 2
+        //los googles asegurarse mejor de quitarlo supongo?
+        //la mision 4 es muy fragil, no es estable para hacerla debe mejorar usando if o radar
+        //reducir sleep y velocidad en la mision 4 del volcan, reparar bugs en caso de este
+    //al ir cerca para retirar los lindens detectar si hay una persona cerca del mismo y esperar y cuando salga ir ahi
+        //al estar listo en la mision 4 debe pasar con la hoja el avatar sin colisionar con la roca
+        //Dejar ya listo cuando clickear un llownersay diciendo http request
+        //detectar totalmente mas rapido las cajas de la mision 2 del desierto e 
+        //disminuir velocidad para ir a la lava
+        //pasar mas veces con la hoja de la mision 3, siempre lo mismo , o velocidad mas lenta, altura?
+        //al resetear el script en la mision 3 agregar posicion al aire
+        //quedarse quieto en esas cajas al detectar una, 
+        //reparar cuando voy a la mision 3, no arranco el de mision 3 al buscar al amuleto el viaje y la hoja la paso 1 vez
+
+    //a veces no se paraba al sentarme en la roca de la lava
+    //http request click a el programa
+    //si le hago click varias veces con el programa o manual debe cambiar de region con un aviso y delay, lo mismo para todos
+    //Lo mismo en el teleport de cancelar//desde el hud enviarle request hack3 ya que llRlVATeleport es lo que lo provoca y no tomar fotitos e compararlas//Presionar enter si esta en la misma ventana para quitar el mensaje//programa para quitar el mensaje detector ese de teleporte //https://answers.opencv.org/question/175646/comparing-two-image/ // http://opencv-tutorials-hub.blogspot.com/ // https://stackoverflow.com/questions/3291167/how-can-i-take-a-screenshot-in-a-windows-application
+
+//detectar diamantes, dejar una camara enfocando los diamantes y deciendo el http request // agregar una variable al menu como c.chack pero otra
+//si una roca me atrapa y le habia dado a el boton listo tengo que darle de vuelta
+-deprecated//DESIERTO CAJA si desaparece al  no clickearla , buscar de vuelta
+//inizializar el hud con las cuentas en un orden, el avatar debe estar invisible, el hud puesto el mas reciente, (archivos arduino)
+//Debe seleccionar la misma mision que se quedo y debe bloquear el linden realms para no entrar de vuelta//si pasa mucho tiempo sin el request del click resetear el hud, si se reseteo varias veces el hud cambiar de region, esto hace el buen dinero automatico
+
+
+
+        /* POSICIONES para ir al piso de otro camino
+        [13:40] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <203.71350, 11.27425, 100.06907>,
+        [13:40] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <203.71350, 11.27425, 60.06907>,
+        [13:36] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <221.84660, 57.79192, 53.77404>,
+        [13:36] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <187.07770, 87.74104, 53.49061>,
+        [13:35] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <151.45830, 88.31565, 57.68225>,
+        [13:35] HKV2.6.0 - ErikV7 Hud's: Posicion Actual: <146.49820, 92.64310, 62.37995>,
+        */
+
+
+        /*key http_request_id;
+
+        llSend(string M)
+        {
+        llMessageLinked(0xFFFFFFFC,0,M,llGetKey());
+        }
+
+        Camera2(vector POSS) //Only googles
+        {
+        if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
+        {
+                vector pos = POSS + <0.23,0,1>;
+                rotation rot = llEuler2Rot(<90,90,-90> * DEG_TO_RAD);
+                llClearCameraParams();
+                llSetCameraParams([
+                CAMERA_ACTIVE, 1,
+                CAMERA_BEHINDNESS_ANGLE, 0.0,
+                CAMERA_BEHINDNESS_LAG, 0.0,
+                CAMERA_DISTANCE, 10.0,
+                CAMERA_FOCUS, pos+(<1,0,0>*rot),
+                CAMERA_FOCUS_LAG, 0.05 ,
+                CAMERA_FOCUS_LOCKED, TRUE,
+                CAMERA_FOCUS_OFFSET,<-10,-10,-10>,
+                CAMERA_FOCUS_THRESHOLD, 0.0,
+                CAMERA_PITCH, 0.0,
+                CAMERA_POSITION, pos,
+                CAMERA_POSITION_LAG, 0.0,
+                CAMERA_POSITION_LOCKED, TRUE,
+                CAMERA_POSITION_THRESHOLD, 0.0
+                ]);   
+        }
+        }
+        
+        default
+        {
+        state_entry()
+        {
+                llRequestPermissions(llGetOwner(), PERMISSION_CONTROL_CAMERA);
+                llSleep(1.0);
+                key keys = "b08bf7f0-5e77-d74f-4195-9f3bab0a380d";
+                        list GRZ = llGetObjectDetails(keys,[OBJECT_POS]);
+
+                        vector HAHAHA =llList2Vector(GRZ,0);
+                        Camera2(HAHAHA);
+        llSleep(3.0);
+        llClearCameraParams( );
+                        
+        }
+        }*/

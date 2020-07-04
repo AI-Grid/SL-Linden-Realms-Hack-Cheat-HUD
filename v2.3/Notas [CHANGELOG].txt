@@ -1,0 +1,62 @@
+//DESERT TIME CAJAS //-Revisar y guardar posiciones posible para recolectar la tercer pieza en el campo surtido y en Desert region tmb
+//http://maps.secondlife.com/secondlife/LR%20182/189/175/32
+//http://maps.secondlife.com/secondlife/LR%202/167/219/25
+//httpmaps.secondlife.comsecondlifeLR%20221876942 ??
+//http://maps.secondlife.com/secondlife/LR%2022/160/33/23
+//http://maps.secondlife.com/secondlife/LR%2022/36/89/24
+//http://maps.secondlife.com/secondlife/LR%2022/216/191/23
+//Amulet
+
+//TARGET FOLLOW Amulet Section MISSION LR 192 - RECORDAR QUE NO DEBE HABER OTRAS PERSONAS PARA QUE NO INTERFIERAN Y PENSAR QUE SE LO TOCO OTRO
+//agregar eso de que elegir el otro weekly si es que hay uno ahi
+        //reducir memoria del script hack
+//CUANDO MUERO EN EL LR 187 DEL AMULET DEBE RESETEAR EL SCRIPT ES EN EL ESTANQUE ESE PUTO
+
+        //Linden realms 2,3,,6 OK
+
+        //reparar el bug de la ropa que se quita porq no funciona por el tema de ese de llgetowner
+        //el sit es mas rapido que unsit en la region de la lava, porloq a veces hay que darle unsit
+    Reparado?//no funciona eso de que se destraba cuando pasas las regiones
+
+        //agregar menos speed cuando termine de juntar los diamantes asi no me aparece la nube
+        //a veces en LR 166 al acercarme al arbol con el hud se me cierra el hud de diamantes sera la altura?
+
+//////////////////////////////////////////////////
+Revisar en los scripts los // eso inclluye terminar C.c hack (camaras) y el camara de get hud
+        //Automatizar deser time cajas
+        //Automatizar amulet mision 3
+	//Si se esta usando el coso de que da dinero para diamantes esperar y ver cuando este disponible
+        //Reparar el tema de la camara
+
+        //Si no fue correcta la transaccion mandar un email
+        //Las misiones no arrancan cuando estoy en la region LR 166 (LR2) //Cambiar canales del HUD
+        NAH //Poner Invisibilidad ON cuando no esta recolectando diamantes
+        //bug de velocidad LO VOY A PONER EN TIMER CONCHA DE LA LORA
+        //[15:41] keiso00: y el IM error de variable seguro
+
+        //desabilitar invisibilidad para la region del desert LR 22
+        //habilitar una camara que enfoque el arbol de heart tree y el que tengo que dar los diamantes
+        //al teletransport para la mision 3 se me desactiva el invisible?
+
+
+ADDS:
+?//creo que si detach y attach de vuelta entre ese timerdelay puedes agarrar varios diamantes en el mismo spawn
+        //(ESTO SUCEDIO EN DESERT QUEST) HAY UNA FORMA DE LIBRARSE DE LAS ROCAS DE MONSTROS TELETRANSPORTANDOSE EL USUARIO A CUALQUIER REGIGION QUE NO EXISTA Y DESAPARECE LA ROCA
+
+BUGS:
+                //si agarran otro amuleto no arranca para el otro
+                //remover eso del llSetColor
+        ?//mucha velocidad deadly mist mision 3
+                //detach solo lo que esta en el avatar llgetlists
+        ?//esta deadly mist cuando termino de juntar los diamantess
+        ?//tarda mucho para dar los lindens
+                //deadly mist en el desert y a veces hay que resetearlo lol
+                //AGREGAR UN SIT Y UNSIT PARA EL OWNER POR SI SE TRABA
+        ?//HEART OF THREE HACER QUE ESTE EN EL AIRE EL AVATAR
+                //SACAR ESO DEL CHANGED REGION Y X()
+//TOCAR MAS VECES LA PUTA HOJA PORQ ME TIENE ARTO EN DESERT TIME Y LA LAVA
+                // channel==54121) poner en lldialog como ayuda
+                //CUANDO STOP O RESET RESETEA EL HACK2 SCRIPT.
+             ?//revisar bien y reparar los permisos de lltakecontrol o no anda nada        
+                
+//aveces no funciona el agarrador de amulet section en a region de la mision numero 3
