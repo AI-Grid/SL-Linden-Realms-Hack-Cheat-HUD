@@ -1,5 +1,6 @@
 /*
 Compilar con codeblocks este mismo codigo
+Para agarrar los diamantes correctamente, setear graficos bajos y dibujar brillo intensidad 0
 
 > Settings > Compiler > Linker settings
 C:\MinGW\lib\libbgi.a ======= -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
@@ -7,6 +8,7 @@ C:\MinGW\lib\libcurldll.a
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 */
 
+#include <math.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,9 +16,11 @@ C:\MinGW\lib\libcurldll.a
 #include <Windows.h>
 #include <Winuser.h>
 #include <ctype.h>
+#include <math.h>
 #include <unistd.h>
 #include <curl/curl.h>
 
+float h, s, v;
 int cursor_x = 0;
 int cursor_y = 0;
 
@@ -50,6 +54,42 @@ bool isRunning(LPCSTR pName)
 	} else {
 		return false;
 	}
+}
+
+float max(float a, float b, float c) 
+{
+   return ((a > b)? (a > c ? a : c) : (b > c ? b : c));
+}
+
+float min(float a, float b, float c) 
+{
+   return ((a < b)? (a < c ? a : c) : (b < c ? b : c));
+}
+
+void rgb_to_hsv(float r, float g, float b) 
+{
+   h=0.0;
+   s=0.0;
+   v=0.0;
+   r /= 255.0;
+   g /= 255.0;
+   b /= 255.0;
+   float cmax = max(r, g, b);
+   float cmin = min(r, g, b);
+   float diff = cmax-cmin;
+   if (cmax == cmin)
+      h = 0;
+   else if (cmax == r)
+      h = fmod((60 * ((g - b) / diff) + 360), 360.0);
+   else if (cmax == g)
+      h = fmod((60 * ((b - r) / diff) + 120), 360.0);
+   else if (cmax == b)
+      h = fmod((60 * ((r - g) / diff) + 240), 360.0);
+      if (cmax == 0)
+         s = 0;
+      else
+         s = (diff / cmax) * 100;
+   v = cmax * 100;
 }
 
 void string2hexString(char* input, char* output)
@@ -135,6 +175,13 @@ int main(void)
     char textin[] = "ErikV7 Hud"; //El nombre del HUD sin signos sin puntos exclamaciones,etc.
     char stringx[500] = "Firestorm-Releasex64 6.3.9.58205 - "; //El programa que se ejecutara en una carpeta en C:/ no en program files
 
+    unsigned int diamantes = 0;
+    unsigned int rojo = 0; //10 rojos
+    unsigned int amarillos = 0; //5 amarillos
+    unsigned int naranjas = 0; //3 naranjas
+    unsigned int verdes = 0; //1 verde
+    //unsigned int azules = 0;
+
     unsigned int starthud = 0;
     unsigned int cages = 0;
     unsigned int click = 0;
@@ -195,6 +242,22 @@ int main(void)
                 SendInput(1, &ip, sizeof(INPUT));
                 ///////////////////////////////////////////
 
+                ip.ki.wVk = 0x4D;
+                ip.ki.dwFlags = 0;
+                SendInput(1, &ip, sizeof(INPUT));
+                ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                SendInput(1, &ip, sizeof(INPUT));
+                Sleep(5000);
+                ip.ki.wVk = 0x4D;
+                ip.ki.dwFlags = 0;
+                SendInput(1, &ip, sizeof(INPUT));
+                ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                SendInput(1, &ip, sizeof(INPUT));
+                Sleep(3000);
+                SaveCursorPos(volatil);
+                Sleep(1000);
+                puts(">> Middle Cursor position SAVED, you can move mouse now.");
+
                 if(newhud==1)
                 {
                     Sleep(1000);
@@ -252,7 +315,7 @@ int main(void)
                         ///////////////////////////////////////////
                         newhud2=0;
                     }
-                    /////////////////////////////////////////// WIREFRAME
+/*                     /////////////////////////////////////////// WIREFRAME
                     // Press the key
                     ip.ki.wVk = 0x11;
                     ip.ki.dwFlags = 0;
@@ -277,24 +340,8 @@ int main(void)
                     ip.ki.wVk = 0x52;
                     ip.ki.dwFlags = KEYEVENTF_KEYUP;
                     SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////////////
+                    /////////////////////////////////////////// */
                     puts(">> HUD Iniciando...");
-
-                    ip.ki.wVk = 0x4D;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    Sleep(5000);
-                    ip.ki.wVk = 0x4D;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    Sleep(3000);
-                    SaveCursorPos(volatil);
-                    Sleep(1000);
-                    puts(">> Middle Cursor position SAVED, you can move mouse now.");
 
                     /////////////////////////////////////////// abrir chat
                     // Press the key
@@ -328,9 +375,113 @@ int main(void)
                     Sleep(1000);
                     run_one_time2=1;
                 }
+                if(diamantes==1)
+                {
+                    if(rojo==10 && amarillos==5 && naranjas==3 && verdes==1)
+                    {
+                        //Switcher4:
+                        puts("\t");
+                        curl = curl_easy_init();
+                        curl_easy_setopt(curl, CURLOPT_URL,php0_switch4);
+                        result = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                        puts("\t");
+                        //////////////
+                        diamantes=0;
+                    }
+                    else
+                    {
+                        SetCursorPos(cursor_x, cursor_y);
+                        POINT p;
+                        COLORREF color;
+                        HDC hDC;
+                        BOOL b;
+
+                        hDC = GetDC(NULL);
+                        if (hDC == NULL)
+                            return 3;
+
+                        b = GetCursorPos(&p);
+                        if (!b)
+                            return 2;
+
+                        color = GetPixel(hDC, p.x, p.y);
+                        if (color == CLR_INVALID)
+                            return 1;
+
+                        ReleaseDC(GetDesktopWindow(), hDC);
+                        int R = GetRValue(color);
+                        int G = GetGValue(color);
+                        int B = GetBValue(color);
+
+                        rgb_to_hsv(R, G, B);
+
+                        if(h>=0 && h<=20)
+                        {
+                            //puts("rojo");
+                            ip.ki.wVk = 0x51;
+                            ip.ki.dwFlags = 0;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            rojo+=1;
+                        }
+                        else if(h>20 && h<=40)
+                        {
+                            //puts("naranja");
+                            ip.ki.wVk = 0x51;
+                            ip.ki.dwFlags = 0;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            naranja+=1;
+                        }
+                        else if(h>40 && h<=63)
+                        {
+                            //puts("amarillo");
+                            ip.ki.wVk = 0x51;
+                            ip.ki.dwFlags = 0;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            amarillo+=1;
+                        }
+                        else if(h>63 && h<=155)
+                        {
+                            //puts("verde");
+                            ip.ki.wVk = 0x51;
+                            ip.ki.dwFlags = 0;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            verde+=1;
+                        }
+                    }
+                }
+                else
+                {
+                    puts("\t");
+                    curl = curl_easy_init();
+                    if(curl) {
+                        curl_easy_setopt(curl, CURLOPT_URL, main_switch4);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                        if(readBuffer=="1" && diamantes==0)
+                        {
+                            diamantes=1;
+                        }
+                        else if(diamantes==1)
+                        {
+                            diamantes=0;
+                        }
+                    }
+                    puts("\t");
+                }
                 if(terminarhud==1)
                 {
-                    /////////////////////////////////////////// abrir chat
+                    /////////////////////////////////////////// cerrar aplicacion
                     // Press the key
                     ip.ki.wVk = 0x11;
                     ip.ki.dwFlags = 0;
@@ -398,6 +549,12 @@ int main(void)
                     cages=0;
                     click=0;
                     terminarhud=0;
+                    diamantes = 0;
+                    rojo = 0;
+                    amarillos = 0;
+                    naranjas = 0;
+                    verdes = 0;
+                    //azules = 0;
                 }
                 else
                 {
@@ -514,31 +671,6 @@ int main(void)
                 }
                 puts("\t");
             }
-
-            //tomar la posicion de la ventana y tomar la posicion del centro de la ventana el medio centro asi con el script enfoco el diamante
-            //en el medio
-            //el nombre de la ventana cambia al iniciar sesion
-            /*POINT p;
-            COLORREF color;
-            HDC hDC;
-            BOOL b;
-
-            hDC = GetDC(NULL);
-            if (hDC == NULL)
-                return 3;
-
-            b = GetCursorPos(&p);
-            if (!b)
-                return 2;
-
-            color = GetPixel(hDC, p.x, p.y);
-            if (color == CLR_INVALID)
-                return 1;
-            // Release the device context again
-            ReleaseDC(GetDesktopWindow(), hDC);
-            printf("[RGB(%i,%i,%i)] - [Pos X:%i / Pos Y:%i]", GetRValue(color), GetGValue(color), GetBValue(color), p.x, p.y);
-            puts("\t");*/
-
         }
         else
         {
@@ -660,9 +792,16 @@ int main(void)
                 SendInput(1, &ip, sizeof(INPUT));
                 ip.ki.dwFlags = KEYEVENTF_KEYUP;
                 SendInput(1, &ip, sizeof(INPUT));
+                puts(">> Debes acomodar la ventana del firestorm antes de que inicie sesion y apriete M. Luego no se debe tocar la ventana.");
                 run_one_time=0;
                 run_one_time2=0;
                 newhud2=0;
+                diamantes = 0;
+                rojo = 0;
+                amarillos = 0;
+                naranjas = 0;
+                verdes = 0;
+                //azules = 0;
             }
         }
     }

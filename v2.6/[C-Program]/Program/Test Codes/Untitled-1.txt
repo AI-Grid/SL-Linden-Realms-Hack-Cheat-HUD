@@ -1,0 +1,148 @@
+[RGB(255,203,17)] - [Pos X:1989 / Pos Y:530]
+amarillo
+[RGB(255,216,1)] - [Pos X:2029 / Pos Y:547]
+amarillo
+[RGB(255,215,2)] - [Pos X:2030 / Pos Y:547]
+amarillo
+[RGB(255,232,2)] - [Pos X:2030 / Pos Y:539]
+amarillo
+[RGB(255,245,0)] - [Pos X:2022 / Pos Y:529]
+amarillo
+[RGB(255,218,15)] - [Pos X:1996 / Pos Y:528]
+amarillo
+[RGB(255,255,6)] - [Pos X:1985 / Pos Y:547]
+amarillo
+[RGB(255,184,13)] - [Pos X:1981 / Pos Y:576]
+[RGB(255,200,13)] - [Pos X:2024 / Pos Y:608]
+amarillo
+[RGB(255,203,1)] - [Pos X:2073 / Pos Y:587]
+amarillo
+[RGB(255,183,10)] - [Pos X:2078 / Pos Y:551]
+[RGB(255,183,17)] - [Pos X:2071 / Pos Y:525]
+[RGB(255,211,6)] - [Pos X:2036 / Pos Y:503]
+amarillo
+[RGB(255,255,9)] - [Pos X:2032 / Pos Y:513]
+amarillo
+[RGB(255,223,3)] - [Pos X:2035 / Pos Y:520]
+amarillo
+[RGB(255,223,3)] - [Pos X:2035 / Pos Y:520]
+amarillo
+[RGB(255,215,10)] - [Pos X:2004 / Pos Y:522]
+amarillo
+[RGB(255,255,1)] - [Pos X:1998 / Pos Y:538]
+amarillo
+[RGB(255,208,4)] - [Pos X:2004 / Pos Y:558]
+amarillo
+[RGB(255,228,5)] - [Pos X:2014 / Pos Y:544]
+amarillo
+[RGB(12,12,12)] - [Pos X:674 / Pos Y:466]
+[RGB(12,12,12)] - [Pos X:397 / Pos Y:525]
+
+
+
+
+
+
+[RGB(255,85,30)] - [Pos X:2051 / Pos Y:397]
+[RGB(255,92,28)] - [Pos X:2039 / Pos Y:387]
+[RGB(255,97,22)] - [Pos X:2013 / Pos Y:373]
+[RGB(242,107,0)] - [Pos X:1971 / Pos Y:369]
+[RGB(247,106,4)] - [Pos X:1967 / Pos Y:383]
+[RGB(240,112,7)] - [Pos X:1972 / Pos Y:396]
+[RGB(255,120,13)] - [Pos X:1953 / Pos Y:396]
+[RGB(227,106,9)] - [Pos X:1950 / Pos Y:370]
+[RGB(255,141,1)] - [Pos X:1992 / Pos Y:351]
+[RGB(255,97,29)] - [Pos X:2038 / Pos Y:387]
+[RGB(255,122,27)] - [Pos X:2056 / Pos Y:419]
+[RGB(255,132,8)] - [Pos X:2037 / Pos Y:450]
+[RGB(255,201,17)] - [Pos X:2013 / Pos Y:472]
+amarillo
+[RGB(235,111,6)] - [Pos X:2034 / Pos Y:472]
+[RGB(255,145,11)] - [Pos X:2010 / Pos Y:473]
+[RGB(233,108,5)] - [Pos X:1961 / Pos Y:474]
+[RGB(255,179,28)] - [Pos X:1949 / Pos Y:427]
+[RGB(238,120,2)] - [Pos X:1981 / Pos Y:431]
+[RGB(255,136,3)] - [Pos X:1994 / Pos Y:455]
+[RGB(255,113,4)] - [Pos X:1962 / Pos Y:440]
+[RGB(255,177,46)] - [Pos X:1937 / Pos Y:413]
+[RGB(243,117,5)] - [Pos X:1977 / Pos Y:402]
+[RGB(255,93,24)] - [Pos X:2025 / Pos Y:396]
+[RGB(244,104,3)] - [Pos X:1970 / Pos Y:375]
+
+
+
+[RGB(245,206,46)] - [Pos X:1991 / Pos Y:454]
+amarillo
+[RGB(245,206,46)] - [Pos X:1991 / Pos Y:454]
+amarillo
+[RGB(245,206,45)] - [Pos X:1994 / Pos Y:454]
+amarillo
+[RGB(223,202,36)] - [Pos X:2025 / Pos Y:434]
+[RGB(193,148,26)] - [Pos X:2021 / Pos Y:418]
+[RGB(191,117,28)] - [Pos X:2062 / Pos Y:431]
+[RGB(207,181,37)] - [Pos X:2064 / Pos Y:469]
+[RGB(196,152,29)] - [Pos X:2034 / Pos Y:493]
+[RGB(196,159,34)] - [Pos X:1990 / Pos Y:473]
+[RGB(253,231,54)] - [Pos X:1990 / Pos Y:453]
+amarillo
+[RGB(203,179,34)] - [Pos X:1997 / Pos Y:434]
+[RGB(193,165,33)] - [Pos X:2056 / Pos Y:455]
+[RGB(177,147,29)] - [Pos X:2015 / Pos Y:492]
+[RGB(234,181,38)] - [Pos X:1982 / Pos Y:430]
+[RGB(252,238,39)] - [Pos X:2021 / Pos Y:434]
+amarillo
+[RGB(12,12,12)] - [Pos X:341 / Pos Y:401]
+[RGB(12,12,12)] - [Pos X:462 / Pos Y:419]
+
+
+
+[RGB(29,31,1)] - [Pos X:1890 / Pos Y:609]
+[RGB(138,13,13)] - [Pos X:1901 / Pos Y:614]
+[RGB(137,14,14)] - [Pos X:1898 / Pos Y:612]
+[RGB(122,11,14)] - [Pos X:1911 / Pos Y:624]
+[RGB(160,16,16)] - [Pos X:1915 / Pos Y:616]
+[RGB(208,26,27)] - [Pos X:1906 / Pos Y:613]
+rojo
+[RGB(138,14,14)] - [Pos X:1902 / Pos Y:616]
+[RGB(138,14,14)] - [Pos X:1902 / Pos Y:616]
+[RGB(119,12,12)] - [Pos X:1907 / Pos Y:603]
+[RGB(110,10,10)] - [Pos X:1922 / Pos Y:608]
+[RGB(28,30,0)] - [Pos X:1923 / Pos Y:631]
+
+
+
+[RGB(62,141,31)] - [Pos X:2089 / Pos Y:59]
+[RGB(63,142,32)] - [Pos X:2091 / Pos Y:61]
+[RGB(113,231,59)] - [Pos X:2095 / Pos Y:63]
+[RGB(67,151,35)] - [Pos X:2085 / Pos Y:64]
+[RGB(66,153,36)] - [Pos X:2080 / Pos Y:64]
+[RGB(53,123,28)] - [Pos X:2078 / Pos Y:64]
+[RGB(61,141,32)] - [Pos X:2089 / Pos Y:64]
+[RGB(198,138,29)] - [Pos X:2016 / Pos Y:221]
+[RGB(198,138,29)] - [Pos X:2016 / Pos Y:221]
+[RGB(198,138,29)] - [Pos X:2016 / Pos Y:221]
+[RGB(198,138,29)] - [Pos X:2016 / Pos Y:221]
+[RGB(198,138,29)] - [Pos X:2016 / Pos Y:221]
+[RGB(206,139,29)] - [Pos X:2015 / Pos Y:223]
+[RGB(28,30,1)] - [Pos X:2083 / Pos Y:227]
+[RGB(27,29,1)] - [Pos X:2023 / Pos Y:309]
+[RGB(25,28,0)] - [Pos X:2012 / Pos Y:325]
+[RGB(26,29,0)] - [Pos X:1882 / Pos Y:547]
+[RGB(27,30,0)] - [Pos X:1876 / Pos Y:616]
+[RGB(188,126,25)] - [Pos X:1884 / Pos Y:588]
+[RGB(226,189,39)] - [Pos X:1908 / Pos Y:590]
+amarillo
+[RGB(206,158,31)] - [Pos X:1894 / Pos Y:609]
+[RGB(217,183,36)] - [Pos X:1908 / Pos Y:613]
+amarillo
+[RGB(193,150,32)] - [Pos X:1919 / Pos Y:585]
+[RGB(230,205,36)] - [Pos X:1885 / Pos Y:577]
+amarillo
+[RGB(207,166,31)] - [Pos X:1880 / Pos Y:592]
+[RGB(28,30,0)] - [Pos X:1624 / Pos Y:533]
+[RGB(17,15,14)] - [Pos X:1664 / Pos Y:531]
+[RGB(24,27,45)] - [Pos X:1956 / Pos Y:476]
+[RGB(29,29,52)] - [Pos X:2034 / Pos Y:471]
+[RGB(46,39,85)] - [Pos X:1942 / Pos Y:448]
+[RGB(25,27,0)] - [Pos X:1782 / Pos Y:421]
+[RGB(12,12,12)] - [Pos X:1250 / Pos Y:406]
