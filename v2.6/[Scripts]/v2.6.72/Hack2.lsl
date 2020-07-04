@@ -1,7 +1,9 @@
 string COK;
-vector pos_now_diamante;
+list list_positions_diamonds = [];
 integer A;
 integer B;
+integer C;
+integer https;
 float SPEED1 = 0.85;
 float SPEED2 = 0.15;
 float OFFSET2 = -0.1;
@@ -13,6 +15,8 @@ float TIMER3 = 0.7;
 integer OKEYLOL;
 integer RUNING;
 integer ohfuck = 0;
+integer serv = 0;
+vector pos_now_diamante;
 
 list LR3 = ["LR 5","LR 25","LR 45","LR 145","LR 165","LR 185"];
 
@@ -353,6 +357,8 @@ StartServer2()
     llSetTimerEvent(0.0);
     llRequestPermissions(owner,0x800);
     ohfuck=0;
+    https=0;
+    serv=0;
     llStopMoveToTarget();
     finalmeta=ZERO_VECTOR;
     A=0;
@@ -437,6 +443,7 @@ ProLAVA(list pos,float SPEED2X,float dists)
         if(ok<=dists)
         {
             ohfuck=0;
+            https=1;
             llSensorRemove();
             A+=1;
             llSensorRepeat("", "", AGENT|SCRIPTED, 20.0, PI, DEG_TO_RAD);
@@ -504,7 +511,9 @@ default
     {
         if(c & CHANGED_REGION) 
         {
+            llClearCameraParams();
             llSleep(1.0);
+            llClearCameraParams();
             if(bahls%2)
             {
                 integer jx;
@@ -529,6 +538,7 @@ default
     {
         if(ohfuck==1)
         {
+            list_positions_diamonds=[];
             integer detected2=detected;
             while(detected2--)
             {
@@ -536,32 +546,15 @@ default
                 list GRZ = llGetObjectDetails(keys,[OBJECT_POS,OBJECT_CREATOR,OBJECT_OWNER]);
                 if(llList2Key(GRZ,1)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80" & llList2Key(GRZ,2)=="efd3d802-701d-48f0-93ab-fce050e6f2ac")
                 {
-                    if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
-                    {
-                        pos_now_diamante = llList2Vector(GRZ,0) + <0,0,0.5>;
-                        rotation rot = llEuler2Rot(<90,90,-90> * DEG_TO_RAD);
-                        llClearCameraParams();
-                        llSetCameraParams([
-                            CAMERA_ACTIVE, 1,
-                            CAMERA_BEHINDNESS_ANGLE, 0.0,
-                            CAMERA_BEHINDNESS_LAG, 0.0,
-                            CAMERA_DISTANCE, 10.0,
-                            CAMERA_FOCUS, pos_now_diamante+(<1,0,0>*rot),
-                            CAMERA_FOCUS_LAG, 0.05 ,
-                            CAMERA_FOCUS_LOCKED, TRUE,
-                            CAMERA_FOCUS_OFFSET,<-10,-10,-10>,
-                            CAMERA_FOCUS_THRESHOLD, 0.0,
-                            CAMERA_PITCH, 0.0,
-                            CAMERA_POSITION, pos_now_diamante,
-                            CAMERA_POSITION_LAG, 0.0,
-                            CAMERA_POSITION_LOCKED, TRUE,
-                            CAMERA_POSITION_THRESHOLD, 0.0
-                        ]);   
-                        llSleep(2.0);
-                    }
+                    vector syntax = llList2Vector(GRZ,0) + <0,0,0.5>;
+                    list_positions_diamonds = [ syntax ] + list_positions_diamonds;
                 }
             }
-            ohfuck=0;
+            vector syntaxD = ZERO_VECTOR;
+            list_positions_diamonds = [ syntaxD ] + list_positions_diamonds;
+            ohfuck=1;
+            serv=1;
+            C=0;
             llSetTimerEvent(DEG_TO_RAD);
             detected = 0;
             detected2 = 0;
@@ -638,9 +631,9 @@ default
     {
         if(ohfuck==1)
         {
-            llSetTimerEvent(DEG_TO_RAD);
             ohfuck=0;
-            llSleep(1.0);
+            llSetTimerEvent(DEG_TO_RAD);
+            llSensorRemove();
         }
         else
         {
@@ -658,6 +651,7 @@ default
             A=0;
             COK=llGetRegionName();
             ohfuck=0;
+            https=0;
             FXDUKS=0;
             finalmeta=ZERO_VECTOR;
             A=0;
@@ -669,10 +663,9 @@ default
         else if(str=="stopXD")
         {
             llOwnerSay(">> Agarrrando diamante, posicion: "+(string)pos_now_diamante);
-            llSensorRemove();
             llSetTimerEvent(0.0);
             llStopMoveToTarget();
-            while(1)
+            for(;;)
             {
                 vector reposicion = pos_now_diamante+<0,0,50>;
                 MoveTarget2(reposicion,owner,0.045);
@@ -683,7 +676,7 @@ default
             }
             @breakXF;
             llStopMoveToTarget();
-            while(1)
+            for(;;)
             {
                 vector reposicion = pos_now_diamante+<0,0,1>;
                 MoveTarget2(reposicion,owner,0.045);
@@ -694,7 +687,7 @@ default
             }
             @breakXD;
             llStopMoveToTarget();
-            while(1)
+            for(;;)
             {
                 vector reposicion = pos_now_diamante+<0,0,50>;
                 MoveTarget2(reposicion,owner,0.045);
@@ -705,15 +698,13 @@ default
             }
             @breakXDb;
             llOwnerSay(">> Agarrando diamante, DONE.");
-            llStopMoveToTarget();
-            llSleep(0.1);
             llSetTimerEvent(DEG_TO_RAD);
-            //MoveTarget2(finalmeta,owner,SPEED1);
         }
         else if(str=="FXDUK")
         {
             FXDUKS=1;
             ohfuck=0;
+            https=0;
             llSetTimerEvent(DEG_TO_RAD);
         }
         else if(str=="YALPTM")
@@ -806,6 +797,7 @@ default
             llOwnerSay("@setenv_preset:Midday=force");
             llOwnerSay("@setenv_preset:Midday=force");
             ohfuck=0;
+            https=1;
             llStopMoveToTarget();
             llSetTimerEvent(0);
             llStopMoveToTarget();
@@ -818,6 +810,7 @@ default
             B=0;
             B=0;
             ohfuck=0;
+            https=1;
             llStopMoveToTarget();
             llSetTimerEvent(0);
             llStopMoveToTarget();
@@ -826,60 +819,113 @@ default
     }
     timer()
     {
-        if(FXDUKS%2)
+        if(ohfuck==1)
         {
-            ProLAVA2(POSRegion12F,0.044444444,0.6);
-            if(finalmeta==ZERO_VECTOR)
+            vector keso = llList2Vector(pos,C);//Se agrego la Z
+            if(keso==ZERO_VECTOR)
             {
-                finalmeta=ZERO_VECTOR;
-                finalmeta=ZERO_VECTOR;
-                A=0;
-                A=0;
-                FXDUKS=0;
-                llSleep(0.5);
-                llStopMoveToTarget();
-                llStopMoveToTarget();
-                llStopMoveToTarget();
-                llOwnerSay(xD+" Obteniendo los Lindens & Apagando script...");
-                llOwnerSay(xD+" Puede usar el hud en otro alter y seguir. Fin del juego.");
-                llSend("STOPTOPE");
-                llSetTimerEvent(0.0);
+                C=0;
+                serv=0;
                 ohfuck=0;
-            }
-        }
-        else
-        {
-            if(llGetRegionName()!=COK)
-            {
-                COK=llGetRegionName();
-                llStopMoveToTarget();
-                A+=1;
+                list_positions_diamonds=[];
             }
             else
             {
-                B=1;
-                finalmeta = llList2Vector(pos,A);//Se agrego la Z
+                if(serv==1)
+                {
+                    if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
+                    {
+                        llClearCameraParams();
+                        pos_now_diamante = keso;
+                        rotation rot = llEuler2Rot(<90,90,-90> * DEG_TO_RAD);
+                        llSetCameraParams([
+                            CAMERA_ACTIVE, 1,
+                            CAMERA_BEHINDNESS_ANGLE, 0.0,
+                            CAMERA_BEHINDNESS_LAG, 0.0,
+                            CAMERA_DISTANCE, 10.0,
+                            CAMERA_FOCUS, pos_now_diamante+(<1,0,0>*rot),
+                            CAMERA_FOCUS_LAG, 0.05 ,
+                            CAMERA_FOCUS_LOCKED, TRUE,
+                            CAMERA_FOCUS_OFFSET,<-10,-10,-10>,
+                            CAMERA_FOCUS_THRESHOLD, 0.0,
+                            CAMERA_PITCH, 0.0,
+                            CAMERA_POSITION, pos_now_diamante,
+                            CAMERA_POSITION_LAG, 0.0,
+                            CAMERA_POSITION_LOCKED, TRUE,
+                            CAMERA_POSITION_THRESHOLD, 0.0
+                        ]);   
+                    }
+                    llResetTime();
+                    serv=0;
+                    C++;
+                }
+                if(serv==0 & llGetTime() >= 3.0)
+                {
+                    serv=1;
+                }
+            }
+        }
+        else 
+        {
+            if(FXDUKS%2)
+            {
+                ProLAVA2(POSRegion12F,0.044444444,0.6);
                 if(finalmeta==ZERO_VECTOR)
                 {
+                    finalmeta=ZERO_VECTOR;
+                    finalmeta=ZERO_VECTOR;
+                    A=0;
+                    A=0;
+                    FXDUKS=0;
+                    llSleep(0.5);
                     llStopMoveToTarget();
-                    llSetTimerEvent(0);
+                    llStopMoveToTarget();
+                    llStopMoveToTarget();
+                    llOwnerSay(xD+" Obteniendo los Lindens & Apagando script...");
+                    llOwnerSay(xD+" Puede usar el hud en otro alter y seguir. Fin del juego.");
+                    llSend("STOPTOPE");
+                    llSetTimerEvent(0.0);
                     ohfuck=0;
+                }
+            }
+            else
+            {
+                if(llGetRegionName()!=COK)
+                {
+                    COK=llGetRegionName();
                     llStopMoveToTarget();
-                    llSend("ResetXB");
-                    llOwnerSay("Recoleccion de los diamantes: AutoCristales Finalizado.");
-                    StartServer2();
+                    A+=1;
                 }
                 else
                 {
-                    MoveTarget2(finalmeta,owner,SPEED1);
-                    llSleep(0.5);
-                    if(llVecDist(llGetPos(),finalmeta)<=1.6)//al tras cristales usa la distancia esta
+                    B=1;
+                    finalmeta = llList2Vector(pos,A);//Se agrego la Z
+                    if(finalmeta==ZERO_VECTOR)
                     {
-                        llSensor("","",(SCRIPTED),0x7FFFFFFF,PI);//camara cristais
-                        //llSleep(TIMER2);
-                        ohfuck=1;
-                        A+=1;
-                        llSetTimerEvent(0.0);
+                        llStopMoveToTarget();
+                        llSetTimerEvent(0);
+                        ohfuck=0;
+                        llStopMoveToTarget();
+                        llSend("ResetXB");
+                        llOwnerSay("Recoleccion de los diamantes: AutoCristales Finalizado.");
+                        StartServer2();
+                    }
+                    else
+                    {
+                        MoveTarget2(finalmeta,owner,SPEED1);
+                        if(llVecDist(llGetPos(),finalmeta)<=1.6)//al tras cristales usa la distancia esta
+                        {
+                            if(https==0)
+                            {
+                                llSend("HTTP-SW4");
+                                https=1;
+                            }
+                            llSensor("","",(SCRIPTED),0x7FFFFFFF,PI);//camara cristais
+                            //llSleep(TIMER2);
+                            ohfuck=1;
+                            A+=1;
+                            llSetTimerEvent(0.0);
+                        }
                     }
                 }
             }

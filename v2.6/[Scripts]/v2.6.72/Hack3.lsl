@@ -110,6 +110,7 @@ default
         }
         if(str=="HTTP-SW4")
         {
+            llOwnerSay("[Color Detection [START]]");
             http_request_id = llHTTPRequest("https://darkerwolf.ddns.net/secondlife/switcher4/variable1.php", [], ""); //Start Diamantes
         }
         if(str=="HTTP-SW5")
