@@ -1,0 +1,1 @@
+        hwnd = FindWindow(NULL,volatil);
