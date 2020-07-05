@@ -846,7 +846,7 @@ default
                     llSensorRemove();
                 }                                
             }
-            if(name=="Amulet" & LOLX!=8)
+          /*  if(name=="Amulet" & LOLX!=8)//Desabilitado para que no quedar ciego, reparar primero el cpp script antes de este
             {
                 XNAILS=1;
                 keys = llDetectedKey(detected);
@@ -858,7 +858,7 @@ default
                     Camera(HAHAHA);
                     llSensorRemove();
                 }                                
-            }
+            }*/
             if(name=="LR - Single Tree" & LOLX!=8)
             {
                 LOLX=1;
@@ -891,6 +891,10 @@ default
             if(LOLX==0)
             {
                 llSleep(1.0); //Algunos requieren mas tiempos
+            }
+            else if(LOLX==1)
+            {
+                llSleep(5.0);
             }
             else
             {

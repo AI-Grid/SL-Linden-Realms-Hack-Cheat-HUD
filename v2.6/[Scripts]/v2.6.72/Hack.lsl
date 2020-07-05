@@ -717,11 +717,11 @@ AirGO()
             else if(~llListFindList(LR7,(list)region))
             {
                 ProLAVA(POSRegion8,SPEED_LINDEN_REALMSdou,0.6);
-                if(finalmeta==<191,-3.84533,67>)
-                {
-                    finalmeta=ZERO_VECTOR;
-                    A=0;
-                }
+                //if(finalmeta==<191,-3.84533,67>)
+                //{
+                //    finalmeta=ZERO_VECTOR;
+                //    A=0;
+                //}
             }
             else if(~llListFindList(LR10,(list)region))
             {

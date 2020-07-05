@@ -24,6 +24,21 @@ float h, s, v;
 int cursor_x = 0;
 int cursor_y = 0;
 
+void LeftClick()
+{
+  INPUT    Input={0};
+  // left down
+  Input.type      = INPUT_MOUSE;
+  Input.mi.dwFlags  = MOUSEEVENTF_LEFTDOWN;
+  ::SendInput(1,&Input,sizeof(INPUT));
+
+  // left up
+  ::ZeroMemory(&Input,sizeof(INPUT));
+  Input.type      = INPUT_MOUSE;
+  Input.mi.dwFlags  = MOUSEEVENTF_LEFTUP;
+  ::SendInput(1,&Input,sizeof(INPUT));
+}
+
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
     ((std::string*)userp)->append((char*)contents, size * nmemb);
@@ -56,17 +71,17 @@ bool isRunning(LPCSTR pName)
 	}
 }
 
-float max(float a, float b, float c) 
+float max(float a, float b, float c)
 {
    return ((a > b)? (a > c ? a : c) : (b > c ? b : c));
 }
 
-float min(float a, float b, float c) 
+float min(float a, float b, float c)
 {
    return ((a < b)? (a < c ? a : c) : (b < c ? b : c));
 }
 
-void rgb_to_hsv(float r, float g, float b) 
+void rgb_to_hsv(float r, float g, float b)
 {
    h=0.0;
    s=0.0;
@@ -256,7 +271,7 @@ int main(void)
                 Sleep(3000);
                 SaveCursorPos(volatil);
                 Sleep(1000);
-                puts(">> Middle Cursor position SAVED, you can move mouse now.");
+                puts("\n>> Middle Cursor position SAVED, you can move mouse now.");
 
                 if(newhud==1)
                 {
@@ -371,27 +386,57 @@ int main(void)
                     ip.ki.dwFlags = KEYEVENTF_KEYUP;
                     SendInput(1, &ip, sizeof(INPUT));
 
+                    /////////////////////////////////////////// cerrar chat
+                    // Press the key
+                    ip.ki.wVk = 0x11;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    // Press the key
+                    ip.ki.wVk = 0x54;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    // Releases the key ///////////////
+                    ip.ki.wVk = 0x11;
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ///////////////////////////////////
+                    ip.ki.wVk = 0x54;
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ///////////////////////////////////////////
+
                     puts(">> HUD Iniciado");
+                    puts(">> Presiona W para parar el agarrar diamantes.");
                     Sleep(1000);
                     run_one_time2=1;
                 }
-                if(diamantes==1)
+       /*        if(diamantes==1)
                 {
-                    if(rojo==10 && amarillos==5 && naranjas==3 && verdes==1)
+                    if((rojo>=10 && amarillos>=5 && naranjas>=3 && verdes>=1) || (GetAsyncKeyState(0x57))) 
                     {
                         //Switcher4:
-                        puts("\t");
+                        ip.ki.wVk = 0x57;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
                         curl = curl_easy_init();
-                        curl_easy_setopt(curl, CURLOPT_URL,php0_switch4);
-                        result = curl_easy_perform(curl);
-                        curl_easy_cleanup(curl);
-                        puts("\t");
+                        readBuffer="";
+                        if(curl)
+                        {
+                            curl_easy_setopt(curl, CURLOPT_URL, php0_switch4);
+                            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                            res = curl_easy_perform(curl);
+                            curl_easy_cleanup(curl);
+                        }
                         //////////////
                         diamantes=0;
                     }
                     else
                     {
                         SetCursorPos(cursor_x, cursor_y);
+
                         POINT p;
                         COLORREF color;
                         HDC hDC;
@@ -416,7 +461,7 @@ int main(void)
 
                         rgb_to_hsv(R, G, B);
 
-                        if(h>=0 && h<=20)
+                        if(h>0.0 && h<=20 && rojo<11)
                         {
                             //puts("rojo");
                             ip.ki.wVk = 0x51;
@@ -426,7 +471,7 @@ int main(void)
                             SendInput(1, &ip, sizeof(INPUT));
                             rojo+=1;
                         }
-                        else if(h>20 && h<=40)
+                        else if(h>20 && h<=40 && naranjas<6)
                         {
                             //puts("naranja");
                             ip.ki.wVk = 0x51;
@@ -434,9 +479,9 @@ int main(void)
                             SendInput(1, &ip, sizeof(INPUT));
                             ip.ki.dwFlags = KEYEVENTF_KEYUP;
                             SendInput(1, &ip, sizeof(INPUT));
-                            naranja+=1;
+                            naranjas+=1;
                         }
-                        else if(h>40 && h<=63)
+                        else if(h>40 && h<=63 && amarillos<4)
                         {
                             //puts("amarillo");
                             ip.ki.wVk = 0x51;
@@ -444,9 +489,9 @@ int main(void)
                             SendInput(1, &ip, sizeof(INPUT));
                             ip.ki.dwFlags = KEYEVENTF_KEYUP;
                             SendInput(1, &ip, sizeof(INPUT));
-                            amarillo+=1;
+                            amarillos+=1;
                         }
-                        else if(h>63 && h<=155)
+                        else if(h>63 && h<=155 && verdes<2)
                         {
                             //puts("verde");
                             ip.ki.wVk = 0x51;
@@ -454,31 +499,35 @@ int main(void)
                             SendInput(1, &ip, sizeof(INPUT));
                             ip.ki.dwFlags = KEYEVENTF_KEYUP;
                             SendInput(1, &ip, sizeof(INPUT));
-                            verde+=1;
+                            verdes+=1;
                         }
+                        else
+                        {
+                            ;
+                        }
+                        //Sleep(1000);
                     }
                 }
                 else
                 {
-                    puts("\t");
                     curl = curl_easy_init();
+                    readBuffer="";
                     if(curl) {
                         curl_easy_setopt(curl, CURLOPT_URL, main_switch4);
                         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
                         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
                         res = curl_easy_perform(curl);
                         curl_easy_cleanup(curl);
-                        if(readBuffer=="1" && diamantes==0)
+                        if(readBuffer.find("1") != std::string::npos)
                         {
                             diamantes=1;
                         }
-                        else if(diamantes==1)
+                        else
                         {
                             diamantes=0;
                         }
                     }
-                    puts("\t");
-                }
+                }*/
                 if(terminarhud==1)
                 {
                     /////////////////////////////////////////// cerrar aplicacion
@@ -501,48 +550,67 @@ int main(void)
                     ///////////////////////////////////////////
 
                     //Switcher1:
-                    puts("\t");
                     curl = curl_easy_init();
-                    curl_easy_setopt(curl, CURLOPT_URL,php0_switch1);
-                    result = curl_easy_perform(curl);
-                    curl_easy_cleanup(curl);
-                    puts("\t");
+                    readBuffer="";
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch1);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
                     //////////////
 
                     //Switcher2:
-                    puts("\t");
                     curl = curl_easy_init();
-                    curl_easy_setopt(curl, CURLOPT_URL,php0_switch2);
-                    result = curl_easy_perform(curl);
-                    curl_easy_cleanup(curl);
-                    puts("\t");
+                    readBuffer="";
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch2);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
                     //////////////
 
                     //Switcher3:
-                    puts("\t");
                     curl = curl_easy_init();
-                    curl_easy_setopt(curl, CURLOPT_URL,php0_switch3);
-                    result = curl_easy_perform(curl);
-                    curl_easy_cleanup(curl);
-                    puts("\t");
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch3);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
                     //////////////
 
                     //Switcher4:
-                    puts("\t");
                     curl = curl_easy_init();
-                    curl_easy_setopt(curl, CURLOPT_URL,php0_switch4);
-                    result = curl_easy_perform(curl);
-                    curl_easy_cleanup(curl);
-                    puts("\t");
+                    readBuffer="";
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch4);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
                     //////////////
 
                     //Switcher5:
-                    puts("\t");
                     curl = curl_easy_init();
-                    curl_easy_setopt(curl, CURLOPT_URL,php0_switch5);
-                    result = curl_easy_perform(curl);
-                    curl_easy_cleanup(curl);
-                    puts("\t");
+                    readBuffer="";
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch5);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
                     //////////////
 
                     starthud=0;
@@ -558,58 +626,109 @@ int main(void)
                 }
                 else
                 {
-                    puts("\t");
                     curl = curl_easy_init();
+                    readBuffer="";
                     if(curl) {
                         curl_easy_setopt(curl, CURLOPT_URL, main_switch5);
                         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
                         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
                         res = curl_easy_perform(curl);
                         curl_easy_cleanup(curl);
-                        if(readBuffer=="1" && terminarhud==0)
+                        if(readBuffer.find("1") != std::string::npos)
                         {
                             terminarhud=1;
                         }
-                        else if(click==1)
+                        else
                         {
                             terminarhud=0;
                         }
                     }
-                    puts("\t");
                 }
                 if(click==1)
                 {
                     SetCursorPos(cursor_x, cursor_y);
                     click=0;
+                    LeftClick();
+
+                    /////////////////////////////////////////// abrir chat
+                    // Press the key
+                    ip.ki.wVk = 0x11;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    // Press the key
+                    ip.ki.wVk = 0x54;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    // Releases the key ///////////////
+                    ip.ki.wVk = 0x11;
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ///////////////////////////////////
+                    ip.ki.wVk = 0x54;
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ///////////////////////////////////////////
+                    Sleep(1000);
+                    char textin2[] = "bx";
+                    smart_key(textin2);
+                    Sleep(1000);
+                    ip.ki.wVk = 0x0D;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+
+                    /////////////////////////////////////////// cerrar chat
+                    // Press the key
+                    ip.ki.wVk = 0x11;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    // Press the key
+                    ip.ki.wVk = 0x54;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    // Releases the key ///////////////
+                    ip.ki.wVk = 0x11;
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ///////////////////////////////////
+                    ip.ki.wVk = 0x54;
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ///////////////////////////////////////////
+
                     //Switcher3:
-                    puts("\t");
                     curl = curl_easy_init();
-                    curl_easy_setopt(curl, CURLOPT_URL,php0_switch3);
-                    result = curl_easy_perform(curl);
-                    curl_easy_cleanup(curl);
-                    puts("\t");
+                    readBuffer="";
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch3);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
                     //////////////
                 }
                 else
                 {
-                    puts("\t");
                     curl = curl_easy_init();
+                    readBuffer="";
                     if(curl) {
                         curl_easy_setopt(curl, CURLOPT_URL, main_switch3);
                         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
                         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
                         res = curl_easy_perform(curl);
                         curl_easy_cleanup(curl);
-                        if(readBuffer=="1" && click==0)
+                        if(readBuffer.find("1") != std::string::npos)
                         {
                             click=1;
                         }
-                        else if(click==1)
+                        else
                         {
                             click=0;
                         }
                     }
-                    puts("\t");
                 }
                 if(cages==1)
                 {
@@ -620,56 +739,58 @@ int main(void)
                     SendInput(1, &ip, sizeof(INPUT));
                     cages=0;
                     //Switcher2:
-                    puts("\t");
                     curl = curl_easy_init();
-                    curl_easy_setopt(curl, CURLOPT_URL,php0_switch2);
-                    result = curl_easy_perform(curl);
-                    curl_easy_cleanup(curl);
-                    puts("\t");
+                    readBuffer="";
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch2);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
                     //////////////
                 }
                 else
                 {
-                    puts("\t");
                     curl = curl_easy_init();
+                    readBuffer="";
                     if(curl) {
                         curl_easy_setopt(curl, CURLOPT_URL, main_switch2);
                         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
                         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
                         res = curl_easy_perform(curl);
                         curl_easy_cleanup(curl);
-                        if(readBuffer=="1" && cages==0)
+                        if(readBuffer.find("1") != std::string::npos)
                         {
                             cages=1;
                         }
-                        else if(cages==1)
+                        else
                         {
                             cages=0;
                         }
                     }
-                    puts("\t");
                 }
             }
             else
             {
-                puts("\t");
                 curl = curl_easy_init();
+                readBuffer="";
                 if(curl) {
                     curl_easy_setopt(curl, CURLOPT_URL, main_switch1);
                     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
                     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
                     res = curl_easy_perform(curl);
                     curl_easy_cleanup(curl);
-                    if(readBuffer=="1" && starthud==0)
-                    {
+                    if(readBuffer.find("1") != std::string::npos)
+                    {              
                         starthud=1;
                     }
-                    else if(starthud==1)
+                    else
                     {
                         starthud=0;
                     }
                 }
-                puts("\t");
             }
         }
         else
@@ -681,52 +802,70 @@ int main(void)
             }
             else if(GetAsyncKeyState(0x58))
             {
-                printf("\n\n=========================================================");
                 //Switcher1:
-                puts("\t");
                 curl = curl_easy_init();
-                curl_easy_setopt(curl, CURLOPT_URL,php0_switch1);
-                result = curl_easy_perform(curl);
-                curl_easy_cleanup(curl);
-                puts("\t");
+                readBuffer="";
+                if(curl)
+                {
+                    curl_easy_setopt(curl, CURLOPT_URL, php0_switch1);
+                    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                    res = curl_easy_perform(curl);
+                    curl_easy_cleanup(curl);
+                }
                 //////////////
 
                 //Switcher2:
-                puts("\t");
                 curl = curl_easy_init();
-                curl_easy_setopt(curl, CURLOPT_URL,php0_switch2);
-                result = curl_easy_perform(curl);
-                curl_easy_cleanup(curl);
-                puts("\t");
+                readBuffer="";
+                if(curl)
+                {
+                    curl_easy_setopt(curl, CURLOPT_URL, php0_switch2);
+                    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                    res = curl_easy_perform(curl);
+                    curl_easy_cleanup(curl);
+                }
                 //////////////
 
                 //Switcher3:
-                puts("\t");
                 curl = curl_easy_init();
-                curl_easy_setopt(curl, CURLOPT_URL,php0_switch3);
-                result = curl_easy_perform(curl);
-                curl_easy_cleanup(curl);
-                puts("\t");
+                readBuffer="";
+                if(curl)
+                {
+                    curl_easy_setopt(curl, CURLOPT_URL, php0_switch3);
+                    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                    res = curl_easy_perform(curl);
+                    curl_easy_cleanup(curl);
+                }
                 //////////////
 
                 //Switcher4:
-                puts("\t");
                 curl = curl_easy_init();
-                curl_easy_setopt(curl, CURLOPT_URL,php0_switch4);
-                result = curl_easy_perform(curl);
-                curl_easy_cleanup(curl);
-                puts("\t");
+                readBuffer="";
+                if(curl)
+                {
+                    curl_easy_setopt(curl, CURLOPT_URL, php0_switch4);
+                    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                    res = curl_easy_perform(curl);
+                    curl_easy_cleanup(curl);
+                }
                 //////////////
 
                 //Switcher5:
-                puts("\t");
                 curl = curl_easy_init();
-                curl_easy_setopt(curl, CURLOPT_URL,php0_switch5);
-                result = curl_easy_perform(curl);
-                curl_easy_cleanup(curl);
-                puts("\t");
+                readBuffer="";
+                if(curl)
+                {
+                    curl_easy_setopt(curl, CURLOPT_URL, php0_switch5);
+                    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                    res = curl_easy_perform(curl);
+                    curl_easy_cleanup(curl);
+                }
                 //////////////
-                printf("\n\n=========================================================");
 
                 INPUT ip;
                 ip.type = INPUT_KEYBOARD;

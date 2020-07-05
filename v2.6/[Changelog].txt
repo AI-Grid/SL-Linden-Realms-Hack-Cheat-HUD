@@ -32,12 +32,19 @@
     //si le hago click varias veces con el programa o manual debe cambiar de region con un aviso y delay, lo mismo para todos
     //Lo mismo en el teleport de cancelar//desde el hud enviarle request hack3 ya que llRlVATeleport es lo que lo provoca y no tomar fotitos e compararlas//Presionar enter si esta en la misma ventana para quitar el mensaje//programa para quitar el mensaje detector ese de teleporte //https://answers.opencv.org/question/175646/comparing-two-image/ // http://opencv-tutorials-hub.blogspot.com/ // https://stackoverflow.com/questions/3291167/how-can-i-take-a-screenshot-in-a-windows-application
 
+//guardar llaves de los diamantes de la region y comprobar que no sean los mismos al apuntar la camara
+    //Aca poner en el hud un LISTO
+    //cuando le haga click al tree de la mision 1 hacer poner mas sleep
+    //reparar el amulet de la mision 4?
+//mision3 aun tiene fallos al tener la posicion de la camara del amulet
+    //mision 3 le tengo que dar un reset nunca va al amuleto
+
     //detectar diamantes, dejar una camara enfocando los diamantes y deciendo el http request // agregar una variable al menu como c.chack pero otra
 //si una roca me atrapa y le habia dado a el boton listo tengo que darle de vuelta
 -deprecated//DESIERTO CAJA si desaparece al  no clickearla , buscar de vuelta
 //inizializar el hud con las cuentas en un orden, el avatar debe estar invisible, el hud puesto el mas reciente, (archivos arduino)
 //Debe seleccionar la misma mision que se quedo y debe bloquear el linden realms para no entrar de vuelta//si pasa mucho tiempo sin el request del click resetear el hud, si se reseteo varias veces el hud cambiar de region, esto hace el buen dinero automatico
-
+reparar las siguientes lineas que dicen: //Desabilitado para que no quedar ciego, reparar primero el cpp script antes de este
 
 
         /* POSICIONES para ir al piso de otro camino
