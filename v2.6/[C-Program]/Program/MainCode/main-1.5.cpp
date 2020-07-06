@@ -187,6 +187,11 @@ int main(void)
     char php0_switch5[] = "http://192.168.3.38/secondlife/switcher5/variable0.php";
     //////////////
 
+    //Switcher6:
+    char main_switch6[] = "http://192.168.3.38/secondlife/datos/switcher6-variable-url.txt";
+    char php0_switch6[] = "http://192.168.3.38/secondlife/switcher6/variable0.php";
+    //////////////
+
     char textin[] = "ErikV7 Hud"; //El nombre del HUD sin signos sin puntos exclamaciones,etc.
     char stringx[500] = "Firestorm-Releasex64 6.3.9.58205 - "; //El programa que se ejecutara en una carpeta en C:/ no en program files
 
@@ -197,6 +202,7 @@ int main(void)
     unsigned int verdes = 0; //1 verde
     //unsigned int azules = 0;
 
+    unsigned int apretarm = 0;
     unsigned int starthud = 0;
     unsigned int cages = 0;
     unsigned int click = 0;
@@ -613,6 +619,19 @@ int main(void)
                     }
                     //////////////
 
+                    //Switcher6:
+                    curl = curl_easy_init();
+                    readBuffer="";
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch6);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
+                    //////////////
+
                     starthud=0;
                     cages=0;
                     click=0;
@@ -621,6 +640,7 @@ int main(void)
                     rojo = 0;
                     amarillos = 0;
                     naranjas = 0;
+                    apretarm = 0;
                     verdes = 0;
                     //azules = 0;
                 }
@@ -649,7 +669,10 @@ int main(void)
                     SetCursorPos(cursor_x, cursor_y);
                     click=0;
                     LeftClick();
+                    LeftClick();
+                    LeftClick();
 
+                    Sleep(1000);
                     /////////////////////////////////////////// abrir chat
                     // Press the key
                     ip.ki.wVk = 0x11;
@@ -677,7 +700,15 @@ int main(void)
                     SendInput(1, &ip, sizeof(INPUT));
                     ip.ki.dwFlags = KEYEVENTF_KEYUP;
                     SendInput(1, &ip, sizeof(INPUT));
-
+                    Sleep(1000);
+                    smart_key(textin2);
+                    Sleep(1000);
+                    ip.ki.wVk = 0x0D;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    Sleep(1000);
                     /////////////////////////////////////////// cerrar chat
                     // Press the key
                     ip.ki.wVk = 0x11;
@@ -727,6 +758,47 @@ int main(void)
                         else
                         {
                             click=0;
+                        }
+                    }
+                }
+                if(apretarm==1)
+                {
+                    ip.ki.wVk = 0x4D;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    apretarm=0;
+                    //Switcher6:
+                    curl = curl_easy_init();
+                    readBuffer="";
+                    if(curl)
+                    {
+                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch6);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                    }
+                    //////////////
+                }
+                else
+                {
+                    curl = curl_easy_init();
+                    readBuffer="";
+                    if(curl) {
+                        curl_easy_setopt(curl, CURLOPT_URL, main_switch6);
+                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                        res = curl_easy_perform(curl);
+                        curl_easy_cleanup(curl);
+                        if(readBuffer.find("1") != std::string::npos)
+                        {
+                            apretarm=1;
+                        }
+                        else
+                        {
+                            apretarm=0;
                         }
                     }
                 }
@@ -867,6 +939,19 @@ int main(void)
                 }
                 //////////////
 
+                //Switcher6:
+                curl = curl_easy_init();
+                readBuffer="";
+                if(curl)
+                {
+                    curl_easy_setopt(curl, CURLOPT_URL, php0_switch6);
+                    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                    res = curl_easy_perform(curl);
+                    curl_easy_cleanup(curl);
+                }
+                //////////////
+
                 INPUT ip;
                 ip.type = INPUT_KEYBOARD;
                 ip.ki.wScan = 0;
@@ -938,6 +1023,7 @@ int main(void)
                 diamantes = 0;
                 rojo = 0;
                 amarillos = 0;
+                apretarm=0;
                 naranjas = 0;
                 verdes = 0;
                 //azules = 0;

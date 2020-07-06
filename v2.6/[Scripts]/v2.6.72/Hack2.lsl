@@ -1178,8 +1178,8 @@ default
             }
             else
             {
-                if(serv==1)
-                {
+             //   if(serv==1)
+              //  {
                     //Desabilitado para que no quedar ciego, reparar primero el cpp script antes de este
                    /* if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
                     {
@@ -1203,15 +1203,15 @@ default
                             CAMERA_POSITION_THRESHOLD, 0.0
                         ]);   
                     }*/
-                    llResetTime();
-                    serv=0;
+                    //llResetTime();
+                //    serv=0;
                     C++;
-                }
+              //  }
                 //if(serv==0 & llGetTime() >= 2.0)//Desabilitado para que no quedar ciego, reparar primero el cpp script antes de este
-                if(serv==0 & llGetTime() >= 0.5)
-                {
-                    serv=1;
-                }
+             //   if(serv==0 & llGetTime() >= 0.01)
+              //  {
+               //     serv=1;
+            //    }
             }
         }
         else 
@@ -1269,11 +1269,11 @@ default
                                 llSend("HTTP-SW4");
                                 https=1;
                             }
-                            llSensor("","",(SCRIPTED),0x7FFFFFFF,PI);//camara cristais
-                            //llSleep(TIMER2);
-                            ohfuck=1;
+                            //llSensor("","",(SCRIPTED),0x7FFFFFFF,PI);//camara cristais
+                            llSleep(TIMER2);
+                            //ohfuck=1;
                             A+=1;
-                            llSetTimerEvent(0.0);
+                            //llSetTimerEvent(0.0);
                         }
                     }
                 }

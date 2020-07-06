@@ -813,6 +813,7 @@ default
     }
     sensor(integer detected)
     {
+        integer GOOGLE=0;
         integer XNAILS;
         if(LOLX!=8)
         {
@@ -831,6 +832,7 @@ default
                     HAHAHA=llList2Vector(GRZ,0);
                     Camera4(HAHAHA);
                     llSensorRemove();
+                    GOOGLE=1;
                 }
             }
             if(name=="Amulet Section" & LOLX!=8)
@@ -901,6 +903,11 @@ default
                 llSleep(1.0); //Sleep        
             }
             llSend("HTTP-SW3");
+            if(GOOGLE==1)
+            {
+                llSend("HTTP-SW6");
+                GOOGLE=0;
+            }
             LOLX=0;
         }
     }

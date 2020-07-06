@@ -117,6 +117,10 @@ default
         {
             http_request_id = llHTTPRequest("https://darkerwolf.ddns.net/secondlife/switcher5/variable1.php", [], ""); //Termino el HUD, cierre de firestorm
         }
+        if(str=="HTTP-SW6")
+        {
+            http_request_id = llHTTPRequest("https://darkerwolf.ddns.net/secondlife/switcher6/variable1.php", [], ""); //Apretar M
+        }
     }
     http_response(key request_id, integer status, list metadata, string body)
     {
