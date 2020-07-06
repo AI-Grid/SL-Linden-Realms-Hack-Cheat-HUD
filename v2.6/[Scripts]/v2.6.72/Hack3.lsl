@@ -7,7 +7,6 @@ integer clientside;
 integer resultado = -1;
 integer i;
 integer Listens2;
-
 float DELAY = 0.8;
 
 Server()

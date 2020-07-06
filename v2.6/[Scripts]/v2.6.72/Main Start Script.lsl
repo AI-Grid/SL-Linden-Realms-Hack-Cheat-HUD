@@ -3,7 +3,6 @@ key UUIDUSER = "53a0480c-485e-4129-bd4e-f2fa9183d17a";
 //////////////////////////////////////////////////////
 
 list LR10 = ["LR 1","LR 21","LR 41","LR 141","LR 161","LR 181"];
-
 string otherscript = "Hack";
 string otherscript2 = "Hack2";
 string otherscript3 = "Hack3";

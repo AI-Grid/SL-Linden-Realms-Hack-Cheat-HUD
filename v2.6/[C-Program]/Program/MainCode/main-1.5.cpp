@@ -3,7 +3,7 @@ Compilar con codeblocks este mismo codigo
 Para agarrar los diamantes correctamente, setear graficos bajos y dibujar brillo intensidad 0
 
 > Settings > Compiler > Linker settings
-C:\MinGW\lib\libbgi.a ======= -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
+C:\MinGW\lib\libbgi.a ==== -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
 C:\MinGW\lib\libcurldll.a
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 */

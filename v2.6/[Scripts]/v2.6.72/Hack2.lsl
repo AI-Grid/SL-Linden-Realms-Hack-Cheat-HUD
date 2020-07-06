@@ -17,7 +17,6 @@ integer RUNING;
 integer ohfuck = 0;
 integer serv = 0;
 vector pos_now_diamante;
-
 list LR3 = ["LR 5","LR 25","LR 45","LR 145","LR 165","LR 185"];
 
 vector finalmeta;
