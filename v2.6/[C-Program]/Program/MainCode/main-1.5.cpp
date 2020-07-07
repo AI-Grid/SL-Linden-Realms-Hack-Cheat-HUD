@@ -202,6 +202,7 @@ int main(void)
     unsigned int verdes = 0; //1 verde
     //unsigned int azules = 0;
 
+    unsigned int manual = 0;
     unsigned int apretarm = 0;
     unsigned int starthud = 0;
     unsigned int cages = 0;
@@ -263,21 +264,24 @@ int main(void)
                 SendInput(1, &ip, sizeof(INPUT));
                 ///////////////////////////////////////////
 
-                ip.ki.wVk = 0x4D;
-                ip.ki.dwFlags = 0;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                SendInput(1, &ip, sizeof(INPUT));
-                Sleep(5000);
-                ip.ki.wVk = 0x4D;
-                ip.ki.dwFlags = 0;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                SendInput(1, &ip, sizeof(INPUT));
-                Sleep(3000);
-                SaveCursorPos(volatil);
-                Sleep(1000);
-                puts("\n>> Middle Cursor position SAVED, you can move mouse now.");
+                if(manual==0)
+                {
+                    ip.ki.wVk = 0x4D;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    Sleep(5000);
+                    ip.ki.wVk = 0x4D;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    Sleep(3000);
+                    SaveCursorPos(volatil);
+                    Sleep(1000);
+                    puts("\n>> Middle Cursor position SAVED, you can move mouse now.");
+                }
 
                 if(newhud==1)
                 {
@@ -336,204 +340,211 @@ int main(void)
                         ///////////////////////////////////////////
                         newhud2=0;
                     }
-/*                     /////////////////////////////////////////// WIREFRAME
-                    // Press the key
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Press the key
-                    ip.ki.wVk = 0xA0;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Press the key
-                    ip.ki.wVk = 0x52;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Releases the key ///////////////
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////
-                    ip.ki.wVk = 0xA0;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////
-                    ip.ki.wVk = 0x52;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    /////////////////////////////////////////// */
-                    puts(">> HUD Iniciando...");
 
-                    /////////////////////////////////////////// abrir chat
-                    // Press the key
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Press the key
-                    ip.ki.wVk = 0x54;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Releases the key ///////////////
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////
-                    ip.ki.wVk = 0x54;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////////////
-                    Sleep(1000);
-                    char textin2[] = "ax";
-                    smart_key(textin2);
-                    Sleep(1000);
-                    ip.ki.wVk = 0x0D;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-
-                    /////////////////////////////////////////// cerrar chat
-                    // Press the key
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Press the key
-                    ip.ki.wVk = 0x54;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Releases the key ///////////////
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////
-                    ip.ki.wVk = 0x54;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////////////
-
-                    puts(">> HUD Iniciado");
-                    puts(">> Presiona W para parar el agarrar diamantes.");
-                    Sleep(1000);
-                    run_one_time2=1;
-                }
-       /*        if(diamantes==1)
-                {
-                    if((rojo>=10 && amarillos>=5 && naranjas>=3 && verdes>=1) || (GetAsyncKeyState(0x57))) 
+                    if(manual==1)
                     {
-                        //Switcher4:
-                        ip.ki.wVk = 0x57;
+                        /////////////////////////////////////////// WIREFRAME
+                        // Press the key
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Press the key
+                        ip.ki.wVk = 0xA0;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Press the key
+                        ip.ki.wVk = 0x52;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Releases the key ///////////////
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////
+                        ip.ki.wVk = 0xA0;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////
+                        ip.ki.wVk = 0x52;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        /////////////////////////////////////////// */
+                    }
+                    else
+                    {
+                        puts(">> HUD Iniciando...");
+
+                        /////////////////////////////////////////// abrir chat
+                        // Press the key
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Press the key
+                        ip.ki.wVk = 0x54;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Releases the key ///////////////
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////
+                        ip.ki.wVk = 0x54;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////////////
+                        Sleep(1000);
+                        char textin2[] = "ax";
+                        smart_key(textin2);
+                        Sleep(1000);
+                        ip.ki.wVk = 0x0D;
                         ip.ki.dwFlags = 0;
                         SendInput(1, &ip, sizeof(INPUT));
                         ip.ki.dwFlags = KEYEVENTF_KEYUP;
                         SendInput(1, &ip, sizeof(INPUT));
+
+                        /////////////////////////////////////////// cerrar chat
+                        // Press the key
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Press the key
+                        ip.ki.wVk = 0x54;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Releases the key ///////////////
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////
+                        ip.ki.wVk = 0x54;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////////////
+
+                        puts(">> HUD Iniciado");
+                        puts(">> Presiona W para parar el agarrar diamantes.");
+                    }
+                    run_one_time2=1;
+                }
+                if(manual==0)
+                {
+                    if(diamantes==1)
+                    {
+                        if((rojo>=10 && amarillos>=5 && naranjas>=3 && verdes>=1) || (GetAsyncKeyState(0x57)))
+                        {
+                            //Switcher4:
+                            ip.ki.wVk = 0x57;
+                            ip.ki.dwFlags = 0;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            curl = curl_easy_init();
+                            readBuffer="";
+                            if(curl)
+                            {
+                                curl_easy_setopt(curl, CURLOPT_URL, php0_switch4);
+                                curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                                curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                                res = curl_easy_perform(curl);
+                                curl_easy_cleanup(curl);
+                            }
+                            //////////////
+                            diamantes=0;
+                        }
+                        else
+                        {
+                            SetCursorPos(cursor_x, cursor_y);
+
+                            POINT p;
+                            COLORREF color;
+                            HDC hDC;
+                            BOOL b;
+
+                            hDC = GetDC(NULL);
+                            if (hDC == NULL)
+                                return 3;
+
+                            b = GetCursorPos(&p);
+                            if (!b)
+                                return 2;
+
+                            color = GetPixel(hDC, p.x, p.y);
+                            if (color == CLR_INVALID)
+                                return 1;
+
+                            ReleaseDC(GetDesktopWindow(), hDC);
+                            int R = GetRValue(color);
+                            int G = GetGValue(color);
+                            int B = GetBValue(color);
+
+                            rgb_to_hsv(R, G, B);
+
+                            /*if(h>0.0 && h<=20 && rojo<11)
+                            {
+                                //puts("rojo");
+                                ip.ki.wVk = 0x51;
+                                ip.ki.dwFlags = 0;
+                                SendInput(1, &ip, sizeof(INPUT));
+                                ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                                SendInput(1, &ip, sizeof(INPUT));
+                                rojo+=1;
+                            }*/
+                            //else if(h>20 && h<=40 && naranjas<6)
+                            rojo=10;
+                            if(h>20 && h<=40 && naranjas<6)
+                            {
+                                //puts("naranja");
+                                ip.ki.wVk = 0x51;
+                                ip.ki.dwFlags = 0;
+                                SendInput(1, &ip, sizeof(INPUT));
+                                ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                                SendInput(1, &ip, sizeof(INPUT));
+                                naranjas+=1;
+                            }
+                            else if(h>40 && h<=63 && amarillos<4)
+                            {
+                                //puts("amarillo");
+                                ip.ki.wVk = 0x51;
+                                ip.ki.dwFlags = 0;
+                                SendInput(1, &ip, sizeof(INPUT));
+                                ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                                SendInput(1, &ip, sizeof(INPUT));
+                                amarillos+=1;
+                            }
+                            else if(h>63 && h<=155 && verdes<2)
+                            {
+                                //puts("verde");
+                                ip.ki.wVk = 0x51;
+                                ip.ki.dwFlags = 0;
+                                SendInput(1, &ip, sizeof(INPUT));
+                                ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                                SendInput(1, &ip, sizeof(INPUT));
+                                verdes+=1;
+                            }
+                            //Sleep(1000);
+                        }
+                    }
+                    else
+                    {
                         curl = curl_easy_init();
                         readBuffer="";
-                        if(curl)
-                        {
-                            curl_easy_setopt(curl, CURLOPT_URL, php0_switch4);
+                        if(curl) {
+                            curl_easy_setopt(curl, CURLOPT_URL, main_switch4);
                             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
                             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
                             res = curl_easy_perform(curl);
                             curl_easy_cleanup(curl);
+                            if(readBuffer.find("1") != std::string::npos)
+                            {
+                                diamantes=1;
+                            }
+                            else
+                            {
+                                diamantes=0;
+                            }
                         }
-                        //////////////
-                        diamantes=0;
-                    }
-                    else
-                    {
-                        SetCursorPos(cursor_x, cursor_y);
-
-                        POINT p;
-                        COLORREF color;
-                        HDC hDC;
-                        BOOL b;
-
-                        hDC = GetDC(NULL);
-                        if (hDC == NULL)
-                            return 3;
-
-                        b = GetCursorPos(&p);
-                        if (!b)
-                            return 2;
-
-                        color = GetPixel(hDC, p.x, p.y);
-                        if (color == CLR_INVALID)
-                            return 1;
-
-                        ReleaseDC(GetDesktopWindow(), hDC);
-                        int R = GetRValue(color);
-                        int G = GetGValue(color);
-                        int B = GetBValue(color);
-
-                        rgb_to_hsv(R, G, B);
-
-                        if(h>0.0 && h<=20 && rojo<11)
-                        {
-                            //puts("rojo");
-                            ip.ki.wVk = 0x51;
-                            ip.ki.dwFlags = 0;
-                            SendInput(1, &ip, sizeof(INPUT));
-                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                            SendInput(1, &ip, sizeof(INPUT));
-                            rojo+=1;
-                        }
-                        else if(h>20 && h<=40 && naranjas<6)
-                        {
-                            //puts("naranja");
-                            ip.ki.wVk = 0x51;
-                            ip.ki.dwFlags = 0;
-                            SendInput(1, &ip, sizeof(INPUT));
-                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                            SendInput(1, &ip, sizeof(INPUT));
-                            naranjas+=1;
-                        }
-                        else if(h>40 && h<=63 && amarillos<4)
-                        {
-                            //puts("amarillo");
-                            ip.ki.wVk = 0x51;
-                            ip.ki.dwFlags = 0;
-                            SendInput(1, &ip, sizeof(INPUT));
-                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                            SendInput(1, &ip, sizeof(INPUT));
-                            amarillos+=1;
-                        }
-                        else if(h>63 && h<=155 && verdes<2)
-                        {
-                            //puts("verde");
-                            ip.ki.wVk = 0x51;
-                            ip.ki.dwFlags = 0;
-                            SendInput(1, &ip, sizeof(INPUT));
-                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                            SendInput(1, &ip, sizeof(INPUT));
-                            verdes+=1;
-                        }
-                        else
-                        {
-                            ;
-                        }
-                        //Sleep(1000);
                     }
                 }
-                else
-                {
-                    curl = curl_easy_init();
-                    readBuffer="";
-                    if(curl) {
-                        curl_easy_setopt(curl, CURLOPT_URL, main_switch4);
-                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-                        res = curl_easy_perform(curl);
-                        curl_easy_cleanup(curl);
-                        if(readBuffer.find("1") != std::string::npos)
-                        {
-                            diamantes=1;
-                        }
-                        else
-                        {
-                            diamantes=0;
-                        }
-                    }
-                }*/
                 if(terminarhud==1)
                 {
                     /////////////////////////////////////////// cerrar aplicacion
@@ -664,182 +675,191 @@ int main(void)
                         }
                     }
                 }
-                if(click==1)
+                if(manual==0)
                 {
-                    SetCursorPos(cursor_x, cursor_y);
-                    click=0;
-                    LeftClick();
-                    LeftClick();
-                    LeftClick();
+                    if(click==1)
+                    {
+                        SetCursorPos(cursor_x, cursor_y);
+                        click=0;
+                        LeftClick();
+                        Sleep(100);
+                        LeftClick();
+                        Sleep(100);
+                        LeftClick();
+                        Sleep(100);
+                        LeftClick();
+                        Sleep(100);
+                        LeftClick();
+                        Sleep(1000);
+                        Sleep(1000);
+                        /////////////////////////////////////////// abrir chat
+                        // Press the key
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Press the key
+                        ip.ki.wVk = 0x54;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Releases the key ///////////////
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////
+                        ip.ki.wVk = 0x54;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////////////
+                        Sleep(1000);
+                        char textin2[] = "bx";
+                        smart_key(textin2);
+                        Sleep(1000);
+                        ip.ki.wVk = 0x0D;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        Sleep(1000);
+                        smart_key(textin2);
+                        Sleep(1000);
+                        ip.ki.wVk = 0x0D;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        Sleep(1000);
+                        /////////////////////////////////////////// cerrar chat
+                        // Press the key
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Press the key
+                        ip.ki.wVk = 0x54;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        // Releases the key ///////////////
+                        ip.ki.wVk = 0x11;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////
+                        ip.ki.wVk = 0x54;
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ///////////////////////////////////////////
 
-                    Sleep(1000);
-                    /////////////////////////////////////////// abrir chat
-                    // Press the key
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Press the key
-                    ip.ki.wVk = 0x54;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Releases the key ///////////////
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////
-                    ip.ki.wVk = 0x54;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////////////
-                    Sleep(1000);
-                    char textin2[] = "bx";
-                    smart_key(textin2);
-                    Sleep(1000);
-                    ip.ki.wVk = 0x0D;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    Sleep(1000);
-                    smart_key(textin2);
-                    Sleep(1000);
-                    ip.ki.wVk = 0x0D;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    Sleep(1000);
-                    /////////////////////////////////////////// cerrar chat
-                    // Press the key
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Press the key
-                    ip.ki.wVk = 0x54;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    // Releases the key ///////////////
-                    ip.ki.wVk = 0x11;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////
-                    ip.ki.wVk = 0x54;
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ///////////////////////////////////////////
-
-                    //Switcher3:
-                    curl = curl_easy_init();
-                    readBuffer="";
-                    if(curl)
+                        //Switcher3:
+                        curl = curl_easy_init();
+                        readBuffer="";
+                        if(curl)
+                        {
+                            curl_easy_setopt(curl, CURLOPT_URL, php0_switch3);
+                            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                            res = curl_easy_perform(curl);
+                            curl_easy_cleanup(curl);
+                        }
+                        //////////////
+                    }
+                    else
                     {
-                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch3);
-                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-                        res = curl_easy_perform(curl);
-                        curl_easy_cleanup(curl);
-                    }
-                    //////////////
-                }
-                else
-                {
-                    curl = curl_easy_init();
-                    readBuffer="";
-                    if(curl) {
-                        curl_easy_setopt(curl, CURLOPT_URL, main_switch3);
-                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-                        res = curl_easy_perform(curl);
-                        curl_easy_cleanup(curl);
-                        if(readBuffer.find("1") != std::string::npos)
-                        {
-                            click=1;
-                        }
-                        else
-                        {
-                            click=0;
+                        curl = curl_easy_init();
+                        readBuffer="";
+                        if(curl) {
+                            curl_easy_setopt(curl, CURLOPT_URL, main_switch3);
+                            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                            res = curl_easy_perform(curl);
+                            curl_easy_cleanup(curl);
+                            if(readBuffer.find("1") != std::string::npos)
+                            {
+                                click=1;
+                            }
+                            else
+                            {
+                                click=0;
+                            }
                         }
                     }
-                }
-                if(apretarm==1)
-                {
-                    ip.ki.wVk = 0x4D;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    apretarm=0;
-                    //Switcher6:
-                    curl = curl_easy_init();
-                    readBuffer="";
-                    if(curl)
+                    if(apretarm==1)
                     {
-                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch6);
-                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-                        res = curl_easy_perform(curl);
-                        curl_easy_cleanup(curl);
-                    }
-                    //////////////
-                }
-                else
-                {
-                    curl = curl_easy_init();
-                    readBuffer="";
-                    if(curl) {
-                        curl_easy_setopt(curl, CURLOPT_URL, main_switch6);
-                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-                        res = curl_easy_perform(curl);
-                        curl_easy_cleanup(curl);
-                        if(readBuffer.find("1") != std::string::npos)
+                        ip.ki.wVk = 0x4D;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        apretarm=0;
+                        //Switcher6:
+                        curl = curl_easy_init();
+                        readBuffer="";
+                        if(curl)
                         {
-                            apretarm=1;
+                            curl_easy_setopt(curl, CURLOPT_URL, php0_switch6);
+                            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                            res = curl_easy_perform(curl);
+                            curl_easy_cleanup(curl);
                         }
-                        else
-                        {
-                            apretarm=0;
-                        }
+                        //////////////
                     }
-                }
-                if(cages==1)
-                {
-                    ip.ki.wVk = 0x0D;
-                    ip.ki.dwFlags = 0;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                    SendInput(1, &ip, sizeof(INPUT));
-                    cages=0;
-                    //Switcher2:
-                    curl = curl_easy_init();
-                    readBuffer="";
-                    if(curl)
+                    else
                     {
-                        curl_easy_setopt(curl, CURLOPT_URL, php0_switch2);
-                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-                        res = curl_easy_perform(curl);
-                        curl_easy_cleanup(curl);
-                    }
-                    //////////////
-                }
-                else
-                {
-                    curl = curl_easy_init();
-                    readBuffer="";
-                    if(curl) {
-                        curl_easy_setopt(curl, CURLOPT_URL, main_switch2);
-                        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-                        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-                        res = curl_easy_perform(curl);
-                        curl_easy_cleanup(curl);
-                        if(readBuffer.find("1") != std::string::npos)
-                        {
-                            cages=1;
+                        curl = curl_easy_init();
+                        readBuffer="";
+                        if(curl) {
+                            curl_easy_setopt(curl, CURLOPT_URL, main_switch6);
+                            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                            res = curl_easy_perform(curl);
+                            curl_easy_cleanup(curl);
+                            if(readBuffer.find("1") != std::string::npos)
+                            {
+                                apretarm=1;
+                            }
+                            else
+                            {
+                                apretarm=0;
+                            }
                         }
-                        else
+                    }
+                    if(cages==1)
+                    {
+                        ip.ki.wVk = 0x0D;
+                        ip.ki.dwFlags = 0;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                        SendInput(1, &ip, sizeof(INPUT));
+                        cages=0;
+                        //Switcher2:
+                        curl = curl_easy_init();
+                        readBuffer="";
+                        if(curl)
                         {
-                            cages=0;
+                            curl_easy_setopt(curl, CURLOPT_URL, php0_switch2);
+                            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                            res = curl_easy_perform(curl);
+                            curl_easy_cleanup(curl);
+                        }
+                        //////////////
+                    }
+                    else
+                    {
+                        curl = curl_easy_init();
+                        readBuffer="";
+                        if(curl) {
+                            curl_easy_setopt(curl, CURLOPT_URL, main_switch2);
+                            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+                            res = curl_easy_perform(curl);
+                            curl_easy_cleanup(curl);
+                            if(readBuffer.find("1") != std::string::npos)
+                            {
+                                cages=1;
+                            }
+                            else
+                            {
+                                cages=0;
+                            }
                         }
                     }
                 }
@@ -855,7 +875,7 @@ int main(void)
                     res = curl_easy_perform(curl);
                     curl_easy_cleanup(curl);
                     if(readBuffer.find("1") != std::string::npos)
-                    {              
+                    {
                         starthud=1;
                     }
                     else
@@ -958,52 +978,97 @@ int main(void)
                 ip.ki.time = 0;
                 ip.ki.dwExtraInfo = 0;
                 char usuario[500];
+                char password[500];
                 printf("\n>> Introduzca el usuario: ");
                 scanf("%s", &usuario);
-                printf(">> Buscar en el inventario un nuevo HUD? Incluye preguntas del permiso (SI=1/NO=0): ");
-                scanf("%d", &newhud);
-                char str1x[500] = "start /b cmd.exe /c C:/Firestorm-releasex64/Firestorm-releasex64.exe --noprobe --set InstallLanguage es --no-verify-ssl-cert --login ";
-                strcat(str1x,&usuario[0]);
-                strcat(str1x," Resident K Wengen/18/226/86 & exit");
-                system(str1x);
-                Sleep(13000);
-                ip.ki.wVk = 0x4b;
-                ip.ki.dwFlags = 0;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.wVk = 0x49;
-                ip.ki.dwFlags = 0;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.wVk = 0x5a;
-                ip.ki.dwFlags = 0;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.wVk = 0x4f;
-                ip.ki.dwFlags = 0;
-                SendInput(1, &ip, sizeof(INPUT));
-                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                SendInput(1, &ip, sizeof(INPUT));
-                printf(">> Clave Asignada: kizo");
-                int caracteres_variable = 5;
-                int i;
-                for (i = 0; i < strlen(usuario); ++i)
+                if(strstr(usuario, "keiso0") != NULL)
+                //if(&usuario.find("keiso0") != std::string::npos)
                 {
-                    if(i>caracteres_variable-1)
+                    printf("==================================\n");
+                    printf(">> Modo Manual (SI=1/NO=0): ");
+                    scanf("%d", &manual);
+                    printf(">> Buscar en el inventario un nuevo HUD? Incluye preguntas del permiso (SI=1/NO=0): ");
+                    scanf("%d", &newhud);
+                    char str1x[500] = "start /b cmd.exe /c C:/Firestorm-releasex64/Firestorm-releasex64.exe --noprobe --set InstallLanguage es --no-verify-ssl-cert --login ";
+                    strcat(str1x,&usuario[0]);
+                    strcat(str1x," Resident K Wengen/18/226/86 & exit");
+                    system(str1x);
+                    Sleep(13000);
+                    ip.ki.wVk = 0x4b;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.wVk = 0x49;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.wVk = 0x5a;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.wVk = 0x4f;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    printf(">> Clave Asignada: kizo");
+                    int caracteres_variable = 5;
+                    int i;
+                    for (i = 0; i < strlen(usuario); ++i)
                     {
-                        int size_output = 1;
-                        char *result = strndup(usuario+i,size_output);
-                        printf(&result[0]);
-                        int value = 48 + atoi(result);
-                        ip.ki.wVk = value;
-                        ip.ki.dwFlags = 0;
-                        SendInput(1, &ip, sizeof(INPUT));
-                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                        SendInput(1, &ip, sizeof(INPUT));
+                        if(i>caracteres_variable-1)
+                        {
+                            int size_output = 1;
+                            char *result = strndup(usuario+i,size_output);
+                            printf(&result[0]);
+                            int value = 48 + atoi(result);
+                            ip.ki.wVk = value;
+                            ip.ki.dwFlags = 0;
+                            SendInput(1, &ip, sizeof(INPUT));
+                            ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                            SendInput(1, &ip, sizeof(INPUT));
+                        }
                     }
+                }
+                else
+                {
+                    printf(">> Introduzca el password: ");
+                    scanf("%s", &password);
+                    printf("==================================\n");
+                    printf(">> Modo Manual (SI=1/NO=0): ");
+                    scanf("%d", &manual);
+                    printf(">> Buscar en el inventario un nuevo HUD? Incluye preguntas del permiso (SI=1/NO=0): ");
+                    scanf("%d", &newhud);
+                    char str1x[500] = "start /b cmd.exe /c C:/Firestorm-releasex64/Firestorm-releasex64.exe --noprobe --set InstallLanguage es --no-verify-ssl-cert --login ";
+                    strcat(str1x,&usuario[0]);
+                    strcat(str1x," Resident K Wengen/18/226/86 & exit");
+                    system(str1x);
+                    Sleep(13000);
+                    ip.ki.wVk = 0x4b;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.wVk = 0x49;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.wVk = 0x5a;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.wVk = 0x4f;
+                    ip.ki.dwFlags = 0;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                    SendInput(1, &ip, sizeof(INPUT));
+                    printf(">> Clave Asignada: %s",password);
+                    smart_key(password);
                 }
                 puts("\t");
                 strcpy(volatil,stringx);
@@ -1016,7 +1081,7 @@ int main(void)
                 SendInput(1, &ip, sizeof(INPUT));
                 ip.ki.dwFlags = KEYEVENTF_KEYUP;
                 SendInput(1, &ip, sizeof(INPUT));
-                puts(">> Debes acomodar la ventana del firestorm antes de que inicie sesion y apriete M. Luego no se debe tocar la ventana.");
+                puts(">> Debes acomodar la ventana del firestorm en el inicio de sesion, no antes ni despues de logear. Luego no se debe tocar la ventana en el caso de no manual.");
                 run_one_time=0;
                 run_one_time2=0;
                 newhud2=0;

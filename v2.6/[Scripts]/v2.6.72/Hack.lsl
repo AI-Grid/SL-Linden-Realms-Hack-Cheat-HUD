@@ -39,7 +39,6 @@ integer XKS;
 integer Contadore;
 integer AGGRESIVE_STATE;
 integer RCDI;
-//integer NO;
 integer MSI = 1;
 integer FIRST;
 integer FIRST2;
@@ -59,7 +58,6 @@ list LR9 = ["LR 3","LR 23","LR 43","LR 143","LR 163","LR 183"];
 list LR10 = ["LR 1","LR 21","LR 41","LR 141","LR 161","LR 181"];
 list LR11 = ["LR 4","LR 24","LR 44","LR 144","LR 164","LR 184"];
 list LR12 = ["LR 9","LR 29","LR 49","149","LR 169","LR 189"];
-list detachsments = ["chest","skull","left shoulder","right shoulder","left hand","right hand","left foot","right foot","spine","pelvis","mouth","chin","left ear","right ear","left eyeball","right eyeball","nose","r upper arm","r forearm","l upper arm","l forearm","right hip","r upper leg","r lower leg","left hip","l upper leg","l lower leg","stomach","left pec","right pec","neck","root"];
 
 integer ServerK;
 integer OXO;
@@ -209,8 +207,9 @@ list POSRegion8 = [<241,130,83>,
 <214,63,38>,
 
 <199,40,67>,
+<191,0.1,67>,
 <191,-2.84533,67>,
-<191,-3.84533,67>,
+//<191,-3.84533,67>,
 <0,0,0>
 ];
 
@@ -717,19 +716,14 @@ AirGO()
             else if(~llListFindList(LR7,(list)region))
             {
                 ProLAVA(POSRegion8,SPEED_LINDEN_REALMSdou,0.6);
-                //if(finalmeta==<191,-3.84533,67>)
-                //{
-                //    finalmeta=ZERO_VECTOR;
-                //    A=0;
-                //}
+                if(finalmeta==<191,-2.84533,67>|finalmeta==ZERO_VECTOR)//
+                {
+                    finalmeta=ZERO_VECTOR;
+                    A=0;
+                }
             }
             else if(~llListFindList(LR10,(list)region))
             {
-                //if(llGetTime()>20.0 & finishs!=<33,109,70> & CA!=17 & CA!=18)
-                //{
-                //    CA=0;
-               //     llResetTime();
-               // }
                 XKS=1;
                 if(CA==18)
                 {
@@ -855,6 +849,10 @@ AirGO()
             }
             else if(~llListFindList(LR8,(list)region))
             {
+                if(CA!=7 & CA!=8)
+                {
+                    CA=0;
+                }
                 if(CA==8)
                 {
                     ZK=1;
@@ -863,11 +861,12 @@ AirGO()
                     RLVTeleportAgent(owner,llList2String(LR1,FK),0,0,0);
                     llSleep(TIME_DELAY_SECONDS_PASS_REGIONS+1.0);
                 }
-                else if(CA==0)
+                if(CA==0)
                 {
                     ProLAVA(POSRegion9,SPEED_LINDEN_REALMS45,2.0);
                     if(finalmeta==<0,0,0>)
                     {
+                        llOwnerSay("[AMOK]");
                         A=0;
                         finalmeta=ZERO_VECTOR;
                         llStopMoveToTarget();
@@ -878,10 +877,6 @@ AirGO()
                         llSend(("CAMARASENSOR"));
                         llSend("CAMARASENSOR");
                     }
-                }
-                else if(CA!=7)
-                {
-                    CA=0;
                 }
             }
             else if(~llListFindList(LR5,(list)region))
@@ -896,14 +891,9 @@ AirGO()
                     llOwnerSay("@remoutfit:alpha=n");
                     llSleep(0.1);
                     llOwnerSay("@detach=n");
-                    llSleep(0.5);
-                    integer FXJX;
-                    for(FXJX=0; FXJX<llGetListLength(detachsments); FXJX++)
-                    {
-                        llOwnerSay("@detach["+llList2String(detachsments,FXJX)+"]=force");
-                        llSleep(0.01);
-                    }
-                    llSleep(0.5);
+                    llSleep(1.5);
+                    llOwnerSay("@detach=force");
+                    llSleep(1.5);
                     llOwnerSay("@detach=y");
                     llSleep(0.1);
                     llOwnerSay("@remoutfit:alpha=y");
@@ -947,24 +937,18 @@ AirGO()
                     if(BoxesNOW%2)
                     {
                         ServerK=0;
-                       // llSend("RAY"+(string)ZERO_VECTOR);
                         finalmeta=ZERO_VECTOR;
                         A=0;
-                        //llSend("RAY20");
                         OXO=0;
                         CA=5;
-                        //llSend("RAY30");
                         llStopMoveToTarget();
                         llSend("XSTOPX");
-                        //llSend("stopnowsensor");
                         BoxesNOW=0;
                         llSend("XSTOPX");
                         llResetOtherScript("Hack2");
-                        //llSend("XSTOPX");
                     }
                     else
                     {
-                      //  llSend("SensorRO");
                         llSend("RAY");
                     }
                 }
@@ -1056,13 +1040,13 @@ AirGO()
                         }
                         else if(CA!=20)
                         {
-                            PROFinder(POSRegion3,SPEED_WAT,MAXDISTANCE2+0.05);//aca puede haber un error quizas
+                            PROFinder(POSRegion3,SPEED_WAT,MAXDISTANCE2+0.05);
                             if(finishs==<20,242,26>)
                             {
                                 llStopMoveToTarget();
-                                if(MSI%2)//FIXE
+                                if(MSI%2)
                                 {
-                                    if(CA==0 )//& NO==0)
+                                    if(CA==0 )
                                     {
                                         CA=19;
                                         llTargetOmega(<0.1,0.0,0.0>,TWO_PI,0.1);
@@ -1082,16 +1066,6 @@ AirGO()
                                         llSend("XFORKX");
                                         llOwnerSay("[START AUTOSCRISTALES]");
                                     }
-                                    /*if(CA==0 & NO==1)
-                                    {
-                                        CA=1;
-                                        NO=0;
-                                        llTargetOmega(<0.1,0.0,0.0>,TWO_PI,0.1);
-                                        //llOwnerSay(xD+" "+nasX);
-                                        RCDI=1;
-                                        llSend(("CAMARASENSOR"));
-                                        ZK=0;
-                                    }*/
                                 }
                                 else
                                 {
@@ -1138,7 +1112,7 @@ MoveTarget(vector Pos,key WHOS,float SPEEDZX)
 ProLAVA(list pos,float SPEED2X,float dists)
 {
     finalmeta = llList2Vector(pos,A);
-    if((finalmeta==ZERO_VECTOR))
+    if(finalmeta==ZERO_VECTOR)
     {
         llStopMoveToTarget();
         llStopMoveToTarget();
@@ -1293,7 +1267,7 @@ default
                     OoKES=0;
                 }
             }
-            if(CA!=19 & OES==0)//fixed
+            if(CA!=19 & OES==0)
             {
                 CA=0;
             }

@@ -10,7 +10,6 @@ float OFFSET2 = -0.1;
 float OFFSET3 = 0.2;
 float H1 = 0.05;
 float H2 = 0.05;
-float TIMER2 = 1.0;
 float TIMER3 = 0.7;
 integer OKEYLOL;
 integer RUNING;
@@ -18,7 +17,8 @@ integer ohfuck = 0;
 integer serv = 0;
 vector pos_now_diamante;
 list LR3 = ["LR 5","LR 25","LR 45","LR 145","LR 165","LR 185"];
-
+string MANUAL = "OFF";
+list llaves_diamantes;
 vector finalmeta;
 
 /*list pos = [
@@ -854,6 +854,7 @@ default
     {
         if(c & CHANGED_REGION) 
         {
+            llaves_diamantes=[];
             llClearCameraParams();
             llSleep(1.0);
             llClearCameraParams();
@@ -886,17 +887,19 @@ default
             while(detected2--)
             {
                 key keys = llDetectedKey(detected2);
-                list GRZ = llGetObjectDetails(keys,[OBJECT_POS,OBJECT_CREATOR,OBJECT_OWNER]);
-                if(llList2Key(GRZ,1)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80" & llList2Key(GRZ,2)=="efd3d802-701d-48f0-93ab-fce050e6f2ac")
+                if(~llListFindList(llaves_diamantes, (list)[(string)keys]))
                 {
-                    vector syntax = llList2Vector(GRZ,0) + <0,0,0.5>;
-                    list_positions_diamonds = [ syntax ] + list_positions_diamonds;
+                    list GRZ = llGetObjectDetails(keys,[OBJECT_POS,OBJECT_CREATOR,OBJECT_OWNER]);
+                    if(llList2Key(GRZ,1)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80" & llList2Key(GRZ,2)=="efd3d802-701d-48f0-93ab-fce050e6f2ac")
+                    {
+                        llaves_diamantes = [(string)keys] + llaves_diamantes;
+                        vector syntax = llList2Vector(GRZ,0) + <0,0,0.5>;
+                        list_positions_diamonds = [ syntax ] + list_positions_diamonds;
+                    }
                 }
             }
             vector syntaxD = ZERO_VECTOR;
             list_positions_diamonds = [ syntaxD ] + list_positions_diamonds;
-            //integer INX = llGetListLength(list_positions_diamonds);
-            //llOwnerSay((string)INX);
             ohfuck=1;
             serv=1;
             C=1;
@@ -915,11 +918,9 @@ default
             while(detected1--)
             {
                 key keys = llDetectedKey(detected1);
-                //llOwnerSay((string)keys);
                 GRZ = llGetObjectDetails(keys,[OBJECT_OWNER,OBJECT_CREATOR,OBJECT_POS]);
                 if(llList2Key(GRZ,0)=="f2683489-f313-47ee-864b-a69754b18677" & llList2Key(GRZ,1)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80")
                 {
-                    //llOwnerSay("[AMULET OK]");
                     serverside+=1;
                     jump break;
                 }
@@ -937,7 +938,6 @@ default
                         float ok = (float)llVecDist((vector)llList2Vector(PERSONA,0),(vector)llList2Vector(GRZ,2));
                         if(llFabs(ok)>10.0)
                         {
-                            //llOwnerSay("[AMULET OK2]");
                             serverside+=1;
                             jump break2;
                         }        
@@ -947,12 +947,11 @@ default
             }
             if(existe==0 & serverside==1)
             {
-                //llOwnerSay("[AMULET OK2]");
                 serverside+=1;
             }
             if(serverside==2)
             {
-               // llSend("CAMARASENSOR2X");//box founded!//Desabilitado para que no quedar ciego, reparar primero el cpp script antes de este
+                llSend("CAMARASENSOR2X");
                 llSend("HEREHEHE");
                 llStopMoveToTarget();
                 llStopMoveToTarget();
@@ -1004,6 +1003,10 @@ default
             llSetTimerEvent(DEG_TO_RAD);
             llSetTimerEvent(DEG_TO_RAD);
             llOwnerSay("[OK AUTOSCRISTALES]");
+        }
+        else if(llGetSubString(str,0,5)=="MANUAL")
+        {
+            MANUAL=(string)llDeleteSubString(str,0,5);
         }
         else if(str=="stopXD")
         {
@@ -1167,7 +1170,7 @@ default
     {
         if(ohfuck==1)
         {
-            vector keso = llList2Vector(list_positions_diamonds,C);//Se agrego la Z
+            vector keso = llList2Vector(list_positions_diamonds,C);
             if(keso==ZERO_VECTOR)
             {
                 C=0;
@@ -1177,10 +1180,9 @@ default
             }
             else
             {
-             //   if(serv==1)
-              //  {
-                    //Desabilitado para que no quedar ciego, reparar primero el cpp script antes de este
-                   /* if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
+                if(serv==1)
+                {
+                    if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
                     {
                         llClearCameraParams();
                         pos_now_diamante = keso;
@@ -1201,16 +1203,15 @@ default
                             CAMERA_POSITION_LOCKED, TRUE,
                             CAMERA_POSITION_THRESHOLD, 0.0
                         ]);   
-                    }*/
-                    //llResetTime();
-                //    serv=0;
+                    }
+                    llResetTime();
+                    serv=0;
                     C++;
-              //  }
-                //if(serv==0 & llGetTime() >= 2.0)//Desabilitado para que no quedar ciego, reparar primero el cpp script antes de este
-             //   if(serv==0 & llGetTime() >= 0.01)
-              //  {
-               //     serv=1;
-            //    }
+                }
+                if(serv==0 & llGetTime() >= 2.0)
+                {
+                    serv=1;
+                }
             }
         }
         else 
@@ -1247,7 +1248,7 @@ default
                 else
                 {
                     B=1;
-                    finalmeta = llList2Vector(pos,A);//Se agrego la Z
+                    finalmeta = llList2Vector(pos,A);
                     if(finalmeta==ZERO_VECTOR)
                     {
                         llStopMoveToTarget();
@@ -1268,11 +1269,17 @@ default
                                 llSend("HTTP-SW4");
                                 https=1;
                             }
-                            //llSensor("","",(SCRIPTED),0x7FFFFFFF,PI);//camara cristais
-                            llSleep(TIMER2);
-                            //ohfuck=1;
-                            A+=1;
-                            //llSetTimerEvent(0.0);
+                            if(MANUAL=="OFF")
+                            {
+                                llSensor("","",(SCRIPTED),0x7FFFFFFF,PI);
+                                ohfuck=1;
+                                llSetTimerEvent(0.0);
+                            }
+                            else
+                            {
+                                A+=1;
+                                //llSleep(1.0);
+                            }
                         }
                     }
                 }

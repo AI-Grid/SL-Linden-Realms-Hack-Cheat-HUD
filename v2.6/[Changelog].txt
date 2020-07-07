@@ -7,7 +7,7 @@
         //mucho sleep en el coso de desert quest
         //como que en los 4900 o +5000 metros de altura no funciona el deadly mist
         //El ctrl+x automatico para oscurecer al recolectar diamantes no se setea
-        //Cuando estoy en otra region y vuelvo a listo desps de recolar diamantes a veces no me lleva al arbol wtf
+//quizas deba cambiar el arbol//Cuando estoy en otra region y vuelvo a listo desps de recolar diamantes a veces no me lleva al arbol wtf
         //Elevar altura trayecto mision 4
         //Remove algunas posiciones
         //Velocidad en algunos puntos
@@ -17,7 +17,7 @@
         //los googles asegurarse mejor de quitarlo supongo?
         //la mision 4 es muy fragil, no es estable para hacerla debe mejorar usando if o radar
         //reducir sleep y velocidad en la mision 4 del volcan, reparar bugs en caso de este
-    //al ir cerca para retirar los lindens detectar si hay una persona cerca del mismo y esperar y cuando salga ir ahi
+//al ir cerca para retirar los lindens detectar si hay una persona cerca del mismo y esperar y cuando salga ir ahi
         //al estar listo en la mision 4 debe pasar con la hoja el avatar sin colisionar con la roca
         //Dejar ya listo cuando clickear un llownersay diciendo http request
         //detectar totalmente mas rapido las cajas de la mision 2 del desierto e 
@@ -36,9 +36,9 @@
     //cuando le haga click al tree de la mision 1 hacer poner mas sleep
     //reparar el amulet de la mision 4?
     //mision3 aun tiene fallos al tener la posicion de la camara del amulet
-    //mision 3 le tengo que dar un reset nunca va al amuleto
+//mision 3 le tengo que dar un reset a veces va al amuleto
 
-//Me clickea varias veces la Q//detectar diamantes, dejar una camara enfocando los diamantes y deciendo el http request // agregar una variable al menu como c.chack pero otra
+//Creo q es el color rojo//Me clickea varias veces la Q//detectar diamantes, dejar una camara enfocando los diamantes y deciendo el http request // agregar una variable al menu como c.chack pero otra
     //si una roca me atrapa y le habia dado a el boton listo tengo que darle de vuelta
         -deprecated//DESIERTO CAJA si desaparece al  no clickearla , buscar de vuelta
 //inizializar el hud con las cuentas en un orden, el avatar debe estar invisible, el hud puesto el mas reciente, (archivos arduino)

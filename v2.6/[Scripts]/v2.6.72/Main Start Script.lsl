@@ -15,6 +15,7 @@ string SWMONEY = "ON";
 string FORZAR="OFF";
 string IMDI="ON";
 string blockpos="OFF";
+string MANUAL = "OFF";
 
 vector positionX;
 key owner;
@@ -136,15 +137,15 @@ X()
     Listens = llListen(1,"",owner,"");
     llDialog(owner,"Linden Realms Profesional HackV2.6"+"\n"+Strings1(),
     [
-                    "+JUMP AVI",
-            "+PUSH AVI",
+    "+JUMP AVI",
+    "+PUSH AVI",
     "LISTO",
     "UserHelp >>",
     "Config >>",
     "Reset",
     "Misiones >>",
     "Money >>",
-    "Stop"
+    "Manual SW"
             ],1);
 }
 X2()
@@ -188,7 +189,8 @@ X4()
         "!ResetAll",
         ".PASSLINDENS",
         ".C.cHACK",
-        "BlockPos"
+        "BlockPos",
+        "Stop"
     ],1);    
 }
 X5()
@@ -632,6 +634,7 @@ default
         {
             llMoveToTarget(positionX,0.044444444);
         }
+        llSend("MANUAL"+MANUAL);
         if(~llListFindList(LR10,(list)llGetRegionName()))
         {
             llSend("OFFCAGE");
@@ -665,18 +668,6 @@ default
             CONTROL_ML_LBUTTON ,
             TRUE,TRUE);
         }
-        /*if(llGetAgentInfo(owner) & AGENT_SITTING)
-        {
-            llSleep(4.0);
-            if(llGetAgentInfo(owner) & AGENT_SITTING)
-            {
-                llOwnerSay("@sit=force");
-                llSleep(0.05);
-                llOwnerSay("@unsit=force");
-                llOwnerSay("@unsit=force");
-                llOwnerSay("@unsit=force");
-            }
-        }*/
     }
     state_entry()
     {
@@ -779,9 +770,6 @@ default
                     llSleep(8.0);
                     llTransferLindenDollars(UUIDUSER,50);
                     llOwnerSay(xD + " Dinero enviado automaticamente con la configuracion del HUD.");
-                    llSleep(3.0);
-                    llSend("HTTP-SW5");
-                    
                 }
                 else
                 {
@@ -801,7 +789,11 @@ default
     }
     transaction_result(key id, integer success, string data)
     {
-        if(!success)
+        if(success)
+        {
+            llSend("HTTP-SW5");
+        }
+        else
         {
             string nameX = llKey2Name(llGetOwnerKey(owner));
             if(llGetSubString(nameX,0,4)=="keiso" & SWMONEY=="ON")
@@ -847,7 +839,7 @@ default
                     llSensorRemove();
                 }                                
             }
-          /*  if(name=="Amulet" & LOLX!=8)//Desabilitado para que no quedar ciego, reparar primero el cpp script antes de este
+            if(name=="Amulet" & LOLX!=8)
             {
                 XNAILS=1;
                 keys = llDetectedKey(detected);
@@ -859,7 +851,7 @@ default
                     Camera(HAHAHA);
                     llSensorRemove();
                 }                                
-            }*/
+            }
             if(name=="LR - Single Tree" & LOLX!=8)
             {
                 LOLX=1;
@@ -895,7 +887,7 @@ default
             }
             else if(LOLX==1)
             {
-                llSleep(5.0);
+                llSleep(1.0);
             }
             else
             {
@@ -1210,6 +1202,21 @@ default
                 llSend("MASS");
                 llSend("ZK=1");
                 X5();
+            }
+            else if(messsage=="Manual SW")
+            {
+                if(MANUAL=="OFF")
+                {
+                    llOwnerSay("Manual ON - Diamantes automaticos OFF.");
+                    MANUAL="ON";
+                }
+                else
+                {
+                    llOwnerSay("Manual OFF - Diamantes automaticos ON.");
+                    MANUAL="OFF";
+                }
+                llSend("MANUAL"+MANUAL);
+                X();                
             }
             else if(message=="IMDisturb")
             {

@@ -158,14 +158,12 @@ default
                 string name = llDetectedName(detected);
                 if(name=="Very Giant Lava Ball - Mountain")
                 {
-                    //llOwnerSay("[Detected]");
                     llSend("SENSORRUN");
                     ke=1;
                 }
             }
             if(ke==0)
             {
-                //llOwnerSay("[No Detected]");
                 llSend("GORUN");
             }
         }
