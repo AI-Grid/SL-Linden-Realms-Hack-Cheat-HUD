@@ -36,7 +36,10 @@
     //cuando le haga click al tree de la mision 1 hacer poner mas sleep
     //reparar el amulet de la mision 4?
     //mision3 aun tiene fallos al tener la posicion de la camara del amulet
-//mision 3 le tengo que dar un reset a veces va al amuleto
+    //mision 3 le tengo que dar un reset a veces va al amuleto
+
+//cuando me detecta el air blob me bloquea por un tiempo al agarrar los diamantes
+
 
 //Creo q es el color rojo//Me clickea varias veces la Q//detectar diamantes, dejar una camara enfocando los diamantes y deciendo el http request // agregar una variable al menu como c.chack pero otra
     //si una roca me atrapa y le habia dado a el boton listo tengo que darle de vuelta

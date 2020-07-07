@@ -16,6 +16,7 @@ string FORZAR="OFF";
 string IMDI="ON";
 string blockpos="OFF";
 string MANUAL = "OFF";
+string AUTODM = "OFF";
 
 vector positionX;
 key owner;
@@ -145,7 +146,7 @@ X()
     "Reset",
     "Misiones >>",
     "Money >>",
-    "Manual SW"
+    "Stop"
             ],1);
 }
 X2()
@@ -190,7 +191,9 @@ X4()
         ".PASSLINDENS",
         ".C.cHACK",
         "BlockPos",
-        "Stop"
+        "Stop",
+        "AUTODM",
+        "Manual SW"
     ],1);    
 }
 X5()
@@ -634,6 +637,7 @@ default
         {
             llMoveToTarget(positionX,0.044444444);
         }
+        llSend("AUTODM"+AUTODM);
         llSend("MANUAL"+MANUAL);
         if(~llListFindList(LR10,(list)llGetRegionName()))
         {
@@ -1207,16 +1211,31 @@ default
             {
                 if(MANUAL=="OFF")
                 {
-                    llOwnerSay("Manual ON - Diamantes automaticos OFF.");
+                    llOwnerSay("Manual ON - Diamantes enfocar ON.");
                     MANUAL="ON";
                 }
                 else
                 {
-                    llOwnerSay("Manual OFF - Diamantes automaticos ON.");
+                    llOwnerSay("Manual OFF - Diamantes enfocar OFF.");
                     MANUAL="OFF";
                 }
                 llSend("MANUAL"+MANUAL);
-                X();                
+                X4();                
+            }
+            else if(message=="AUTODM")
+            {
+                if(AUTODM=="OFF")
+                {
+                    llOwnerSay("AUTODM ON - Diamantes recolectar auto ON.");
+                    AUTODM="ON";
+                }
+                else
+                {
+                    llOwnerSay("AUTODM OFF - Diamantes recolectar auto OFF.");
+                    AUTODM="OFF";
+                }
+                llSend("AUTODM"+AUTODM);
+                X4();                
             }
             else if(message=="IMDisturb")
             {

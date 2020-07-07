@@ -241,8 +241,8 @@ default
             if(testsB!=NULL_KEY & testsB!=owner & testsB!=llGetOwnerKey(owner))
             {
                 RLVTeleportAgent(owner,llList2String(regiones,resultado),0,0,0);
-                llSleep(DELAY);
                 llSend("HTTP-SW2");
+                llSleep(DELAY);
             }
         }
     }

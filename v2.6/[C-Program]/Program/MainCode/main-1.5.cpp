@@ -1,6 +1,6 @@
 /*
 Compilar con codeblocks este mismo codigo
-Para agarrar los diamantes correctamente, setear graficos bajos y dibujar brillo intensidad 0
+Para agarrar los diamantes correctamente, setear graficos bajos y dibujar brillo intensidad 3, con RenderGlowMinLuminance en value 0.400, el defecto es 1.0, desabilitar teleporte con 2 clicks
 
 > Settings > Compiler > Linker settings
 C:\MinGW\lib\libbgi.a ==== -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
@@ -201,8 +201,9 @@ int main(void)
     unsigned int naranjas = 0; //3 naranjas
     unsigned int verdes = 0; //1 verde
     //unsigned int azules = 0;
-
+    unsigned int slr = 0;
     unsigned int manual = 0;
+    unsigned int LOL = 0;
     unsigned int apretarm = 0;
     unsigned int starthud = 0;
     unsigned int cages = 0;
@@ -430,8 +431,16 @@ int main(void)
                 {
                     if(diamantes==1)
                     {
-                        if((rojo>=10 && amarillos>=5 && naranjas>=3 && verdes>=1) || (GetAsyncKeyState(0x57)))
+                        if(slr==1)
                         {
+                            SetCursorPos(cursor_x, cursor_y);
+                            Sleep(6000);
+                            slr=0;
+                        }
+                        //if((rojo>=10 && amarillos>=5 && naranjas>=3 && verdes>=1) || (GetAsyncKeyState(0x57)))
+                        if((amarillos>=5 && naranjas>=3 && verdes>=1) || (GetAsyncKeyState(0x57)))
+                        {
+                            puts(">> Recolleccion Finalizada, apagando... OK");
                             //Switcher4:
                             ip.ki.wVk = 0x57;
                             ip.ki.dwFlags = 0;
@@ -455,73 +464,88 @@ int main(void)
                         {
                             SetCursorPos(cursor_x, cursor_y);
 
-                            POINT p;
-                            COLORREF color;
-                            HDC hDC;
-                            BOOL b;
-
-                            hDC = GetDC(NULL);
-                            if (hDC == NULL)
-                                return 3;
-
-                            b = GetCursorPos(&p);
-                            if (!b)
-                                return 2;
-
-                            color = GetPixel(hDC, p.x, p.y);
-                            if (color == CLR_INVALID)
-                                return 1;
-
-                            ReleaseDC(GetDesktopWindow(), hDC);
-                            int R = GetRValue(color);
-                            int G = GetGValue(color);
-                            int B = GetBValue(color);
-
-                            rgb_to_hsv(R, G, B);
-
-                            /*if(h>0.0 && h<=20 && rojo<11)
+                            if(LOL==1)
                             {
-                                //puts("rojo");
-                                ip.ki.wVk = 0x51;
-                                ip.ki.dwFlags = 0;
-                                SendInput(1, &ip, sizeof(INPUT));
-                                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                                SendInput(1, &ip, sizeof(INPUT));
-                                rojo+=1;
-                            }*/
-                            //else if(h>20 && h<=40 && naranjas<6)
-                            rojo=10;
-                            if(h>20 && h<=40 && naranjas<6)
-                            {
-                                //puts("naranja");
-                                ip.ki.wVk = 0x51;
-                                ip.ki.dwFlags = 0;
-                                SendInput(1, &ip, sizeof(INPUT));
-                                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                                SendInput(1, &ip, sizeof(INPUT));
-                                naranjas+=1;
+                                POINT p;
+                                COLORREF color;
+                                HDC hDC;
+                                BOOL b;
+
+                                hDC = GetDC(NULL);
+                                if (hDC == NULL)
+                                    return 3;
+
+                                b = GetCursorPos(&p);
+                                if (!b)
+                                    return 2;
+
+                                color = GetPixel(hDC, p.x, p.y);
+                                if (color == CLR_INVALID)
+                                    return 1;
+
+                                ReleaseDC(GetDesktopWindow(), hDC);
+                                int R = GetRValue(color);
+                                int G = GetGValue(color);
+                                int B = GetBValue(color);
+
+                                rgb_to_hsv(R, G, B);
+
+                                if(h!=0.0)
+                                {
+                                    if((h>0.0 && h<=3) || (h>=358.0 && h<=359.9))
+                                    {
+                                        puts(">> Rojo");
+                                        ip.ki.wVk = 0x51;
+                                        ip.ki.dwFlags = 0;
+                                        SendInput(1, &ip, sizeof(INPUT));
+                                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                                        SendInput(1, &ip, sizeof(INPUT));
+                                        rojo+=1;
+                                    }
+                                    else if(h>59 && h<=61 && s>=61)//62
+                                    {
+                                        puts(">> Naranja");
+                                        ip.ki.wVk = 0x51;
+                                        ip.ki.dwFlags = 0;
+                                        SendInput(1, &ip, sizeof(INPUT));
+                                        Sleep(100);
+                                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                                        SendInput(1, &ip, sizeof(INPUT));
+                                        naranjas+=1;
+                                    }
+                                    else if(h>59 && h<=61)
+                                    {
+                                        puts(">> Amarillo");
+                                        ip.ki.wVk = 0x51;
+                                        ip.ki.dwFlags = 0;
+                                        SendInput(1, &ip, sizeof(INPUT));
+                                        Sleep(100);
+                                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                                        SendInput(1, &ip, sizeof(INPUT));
+                                        amarillos+=1;
+                                    }
+                                    else if(h>90 && h<=101)
+                                    {
+                                        puts(">> Verde");
+                                        ip.ki.wVk = 0x51;
+                                        ip.ki.dwFlags = 0;
+                                        SendInput(1, &ip, sizeof(INPUT));
+                                        Sleep(100);
+                                        ip.ki.dwFlags = KEYEVENTF_KEYUP;
+                                        SendInput(1, &ip, sizeof(INPUT));
+                                        verdes+=1;
+                                    }
+                                }
+                                LeftClick();
+                                Sleep(1500);
+                                LeftClick();
                             }
-                            else if(h>40 && h<=63 && amarillos<4)
+                            else
                             {
-                                //puts("amarillo");
-                                ip.ki.wVk = 0x51;
-                                ip.ki.dwFlags = 0;
-                                SendInput(1, &ip, sizeof(INPUT));
-                                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                                SendInput(1, &ip, sizeof(INPUT));
-                                amarillos+=1;
+                                LeftClick();
+                                LeftClick();
+                                LeftClick();
                             }
-                            else if(h>63 && h<=155 && verdes<2)
-                            {
-                                //puts("verde");
-                                ip.ki.wVk = 0x51;
-                                ip.ki.dwFlags = 0;
-                                SendInput(1, &ip, sizeof(INPUT));
-                                ip.ki.dwFlags = KEYEVENTF_KEYUP;
-                                SendInput(1, &ip, sizeof(INPUT));
-                                verdes+=1;
-                            }
-                            //Sleep(1000);
                         }
                     }
                     else
@@ -534,8 +558,13 @@ int main(void)
                             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
                             res = curl_easy_perform(curl);
                             curl_easy_cleanup(curl);
-                            if(readBuffer.find("1") != std::string::npos)
+                            if(readBuffer.find("1") != std::string::npos && diamantes==0)
                             {
+                                rojo=0;
+                                amarillos=0;
+                                verdes=0;
+                                naranjas=0;
+                                slr=1;
                                 diamantes=1;
                             }
                             else
@@ -987,6 +1016,8 @@ int main(void)
                     printf("==================================\n");
                     printf(">> Modo Manual (SI=1/NO=0): ");
                     scanf("%d", &manual);
+                    printf(">> Va a recolectar diamantes normalmente o a lo loco? (normalmente=1 / loco=0): ");
+                    scanf("%d", &LOL);
                     printf(">> Buscar en el inventario un nuevo HUD? Incluye preguntas del permiso (SI=1/NO=0): ");
                     scanf("%d", &newhud);
                     char str1x[500] = "start /b cmd.exe /c C:/Firestorm-releasex64/Firestorm-releasex64.exe --noprobe --set InstallLanguage es --no-verify-ssl-cert --login ";
@@ -1040,6 +1071,8 @@ int main(void)
                     printf("==================================\n");
                     printf(">> Modo Manual (SI=1/NO=0): ");
                     scanf("%d", &manual);
+                    printf(">> Va a recolectar diamantes normalmente o a lo loco? (normalmente=1 / loco=0): ");
+                    scanf("%d", &LOL);
                     printf(">> Buscar en el inventario un nuevo HUD? Incluye preguntas del permiso (SI=1/NO=0): ");
                     scanf("%d", &newhud);
                     char str1x[500] = "start /b cmd.exe /c C:/Firestorm-releasex64/Firestorm-releasex64.exe --noprobe --set InstallLanguage es --no-verify-ssl-cert --login ";

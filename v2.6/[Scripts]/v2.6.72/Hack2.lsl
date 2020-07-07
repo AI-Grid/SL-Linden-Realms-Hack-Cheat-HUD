@@ -5,6 +5,7 @@ integer B;
 integer C;
 integer https;
 float SPEED1 = 0.85;
+float SPEED0 = 0.85;
 float SPEED2 = 0.15;
 float OFFSET2 = -0.1;
 float OFFSET3 = 0.2;
@@ -18,6 +19,7 @@ integer serv = 0;
 vector pos_now_diamante;
 list LR3 = ["LR 5","LR 25","LR 45","LR 145","LR 165","LR 185"];
 string MANUAL = "OFF";
+string AUTODM = "OFF";
 list llaves_diamantes;
 vector finalmeta;
 
@@ -854,6 +856,7 @@ default
     {
         if(c & CHANGED_REGION) 
         {
+            llOwnerSay("@setenv_preset:Night=force");//
             llaves_diamantes=[];
             llClearCameraParams();
             llSleep(1.0);
@@ -861,7 +864,7 @@ default
             if(bahls%2)
             {
                 integer jx;
-                for (jx = 0; jx < 10; jx++)
+                for (jx = 0; jx < 15; jx++)
                 {
                     llOwnerSay("@setenv_preset:Night=force");
                     llSleep(0.1);
@@ -870,9 +873,10 @@ default
             else
             {
                 integer jx;
-                for (jx = 0; jx < 10; jx++)
+                for (jx = 0; jx < 15; jx++)
                 {
-                    llOwnerSay("@setenv_preset:Midday=force");
+                    //llOwnerSay("@setenv_preset:Midday=force");
+                    llOwnerSay("@setenv_preset:Night=force");//
                     llSleep(0.1);
                 }
             }
@@ -893,8 +897,7 @@ default
                     if(llList2Key(GRZ,1)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80" & llList2Key(GRZ,2)=="efd3d802-701d-48f0-93ab-fce050e6f2ac")
                     {
                         llaves_diamantes = [(string)keys] + llaves_diamantes;
-                        vector syntax = llList2Vector(GRZ,0) + <0,0,0.5>;
-                        list_positions_diamonds = [ syntax ] + list_positions_diamonds;
+                        list_positions_diamonds = llGetObjectDetails(keys,[OBJECT_POS]) + list_positions_diamonds;
                     }
                 }
             }
@@ -1008,43 +1011,128 @@ default
         {
             MANUAL=(string)llDeleteSubString(str,0,5);
         }
+        else if(llGetSubString(str,0,5)=="AUTODM")
+        {
+            AUTODM=(string)llDeleteSubString(str,0,5);
+        }
         else if(str=="stopXD")
         {
-            llOwnerSay(">> Agarrrando diamante, posicion: "+(string)pos_now_diamante);
+/*
             llSetTimerEvent(0.0);
+            llOwnerSay(">> Agarrrando diamante, posicion: "+(string)pos_now_diamante);
+
+            vector reposicion = pos_now_diamante+<0,0,20>;
+            vector reposicion3 = pos_now_diamante;
+            vector reposicion2 = pos_now_diamante-<0,0,1>;
             llStopMoveToTarget();
             while(TRUE)
             {
-                vector reposicion = pos_now_diamante+<0,0,20>;
-                MoveTarget2(reposicion,owner,0.045);
-                if(llVecDist(llGetPos(),reposicion)<=0.45)
+                MoveTarget2(reposicion,owner,0.1);
+                if((float)llVecDist((vector)llGetPos(),(vector)reposicion)<=(float)1.1)
                 {
                     jump breakXF;
                 }
             }
             @breakXF;
+            MoveTarget2(reposicion,owner,0.1);
             llStopMoveToTarget();
             while(TRUE)
             {
-                vector reposicion = pos_now_diamante+<0,0,0>;
-                MoveTarget2(reposicion,owner,0.045);
-                if(llVecDist(llGetPos(),reposicion)<=0.45)
+                MoveTarget2(reposicion3,owner,0.1);
+                if((float)llVecDist((vector)llGetPos(),(vector)reposicion3)<=(float)1.1)
+                {
+                    jump breakXFf;
+                }
+            }
+            @breakXFf;
+            MoveTarget2(reposicion3,owner,0.1);
+            llStopMoveToTarget();
+            //llSleep(0.5);
+            llResetTime();
+            while(TRUE)
+            {
+                MoveTarget2(reposicion2,owner,0.1);
+                if(llGetTime()>=2.0)
                 {
                     jump breakXD;
                 }
             }
             @breakXD;
+            MoveTarget2(reposicion2,owner,0.1);
             llStopMoveToTarget();
             while(TRUE)
             {
-                vector reposicion = pos_now_diamante+<0,0,20>;
-                MoveTarget2(reposicion,owner,0.045);
-                if(llVecDist(llGetPos(),reposicion)<=0.45)
+                MoveTarget2(reposicion,owner,0.1);
+                if((float)llVecDist((vector)llGetPos(),(vector)reposicion)<=(float)1.1)
                 {
                     jump breakXDb;
                 }
             }
             @breakXDb;
+            MoveTarget2(reposicion,owner,0.1);
+            llStopMoveToTarget();
+            llOwnerSay(">> Agarrando diamante, DONE.");
+            llSetTimerEvent(DEG_TO_RAD);
+*/
+            llSetTimerEvent(0.0);
+            llOwnerSay(">> Agarrrando diamante, posicion: "+(string)pos_now_diamante);
+            vector reposicion = pos_now_diamante+<0,0,10>;
+            vector reposicion2 = pos_now_diamante+<0,0,4>;
+            while(TRUE)
+            {
+                MoveTarget2(reposicion,owner,SPEED0);
+                if((float)llVecDist((vector)llGetPos(),(vector)reposicion)<=(float)1.1)
+                {
+                    jump breakXF;
+                }
+            }
+            @breakXF;
+
+            llResetTime();
+            while(TRUE)
+            {
+                MoveTarget2(pos_now_diamante,owner,SPEED0);
+                if(llGetTime()>=0.5)
+                {
+                    jump breakXD;
+                }
+            }
+            @breakXD;
+
+            while(TRUE)
+            {
+                MoveTarget2(reposicion2,owner,SPEED0);
+                if((float)llVecDist((vector)llGetPos(),(vector)reposicion2)<=(float)1.1)
+                {
+                    jump breakXDbC;
+                }
+            }
+            @breakXDbC;
+
+            llResetTime();
+            while(TRUE)
+            {
+                MoveTarget2(pos_now_diamante,owner,SPEED0);
+                if(llGetTime()>=0.5)
+                {
+                    jump breakXDR;
+                }
+            }
+            @breakXDR;
+
+            if(AUTODM=="OFF")
+            {
+                while(TRUE)
+                {
+                    MoveTarget2(reposicion,owner,SPEED0);
+                    if((float)llVecDist((vector)llGetPos(),(vector)reposicion)<=(float)1.1)
+                    {
+                        jump breakXFZ;
+                    }
+                }
+                @breakXFZ;
+            }
+
             llOwnerSay(">> Agarrando diamante, DONE.");
             llSetTimerEvent(DEG_TO_RAD);
         }
@@ -1136,21 +1224,25 @@ default
         }
         else if((str=="STOPSTOP" & B%2))
         {
-            bahls=0;
-            FXDUKS=0;
-            B=0;
-            B=0;
-            llOwnerSay("[DEBUG] Se ha parado el AutoCristales por el usuario, use el boton ResetPaseo para volver, en el caso de volver debe estar lo mas cerca posible.");
-            llClearCameraParams();
-            llOwnerSay("@setenv_preset:Midday=force");
-            llOwnerSay("@setenv_preset:Midday=force");
-            llOwnerSay("@setenv_preset:Midday=force");
-            ohfuck=0;
-            https=1;
-            llStopMoveToTarget();
-            llSetTimerEvent(0);
-            llStopMoveToTarget();
-            StartServer2();
+            if(AUTODM=="OFF")
+            {
+                bahls=0;
+                FXDUKS=0;
+                B=0;
+                B=0;
+                llOwnerSay("[DEBUG] Se ha parado el AutoCristales por el usuario, use el boton ResetPaseo para volver, en el caso de volver debe estar lo mas cerca posible.");
+                llClearCameraParams();
+                //llOwnerSay("@setenv_preset:Midday=force");
+                //llOwnerSay("@setenv_preset:Midday=force");
+                //llOwnerSay("@setenv_preset:Midday=force");
+                llOwnerSay("@setenv_preset:Night=force");//
+                ohfuck=0;
+                https=1;
+                llStopMoveToTarget();
+                llSetTimerEvent(0);
+                llStopMoveToTarget();
+                StartServer2();
+            }
         }
         else if((str=="STOPSTOP2" & B%2))
         {
@@ -1170,47 +1262,68 @@ default
     {
         if(ohfuck==1)
         {
-            vector keso = llList2Vector(list_positions_diamonds,C);
-            if(keso==ZERO_VECTOR)
+            if(AUTODM=="ON")
             {
-                C=0;
-                serv=0;
-                ohfuck=0;
-                list_positions_diamonds=[];
+                vector keso = llList2Vector(list_positions_diamonds,C);
+                if(keso==ZERO_VECTOR)
+                {
+                    C=0;
+                    serv=0;
+                    ohfuck=0;
+                    list_positions_diamonds=[];
+                }
+                else
+                {
+                    pos_now_diamante = keso;
+                    C++;
+                    llSend("stopXD");
+                }
             }
             else
             {
-                if(serv==1)
+                vector keso = llList2Vector(list_positions_diamonds,C);
+                if(keso==ZERO_VECTOR)
                 {
-                    if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
-                    {
-                        llClearCameraParams();
-                        pos_now_diamante = keso;
-                        rotation rot = llEuler2Rot(<90,90,-90> * DEG_TO_RAD);
-                        llSetCameraParams([
-                            CAMERA_ACTIVE, 1,
-                            CAMERA_BEHINDNESS_ANGLE, 0.0,
-                            CAMERA_BEHINDNESS_LAG, 0.0,
-                            CAMERA_DISTANCE, 10.0,
-                            CAMERA_FOCUS, pos_now_diamante+(<1,0,0>*rot),
-                            CAMERA_FOCUS_LAG, 0.05 ,
-                            CAMERA_FOCUS_LOCKED, TRUE,
-                            CAMERA_FOCUS_OFFSET,<-10,-10,-10>,
-                            CAMERA_FOCUS_THRESHOLD, 0.0,
-                            CAMERA_PITCH, 0.0,
-                            CAMERA_POSITION, pos_now_diamante,
-                            CAMERA_POSITION_LAG, 0.0,
-                            CAMERA_POSITION_LOCKED, TRUE,
-                            CAMERA_POSITION_THRESHOLD, 0.0
-                        ]);   
-                    }
-                    llResetTime();
+                    C=0;
                     serv=0;
-                    C++;
+                    ohfuck=0;
+                    list_positions_diamonds=[];
                 }
-                if(serv==0 & llGetTime() >= 1.9)
+                else
                 {
-                    serv=1;
+                    if(serv==1)
+                    {
+                        if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
+                        {
+                            llClearCameraParams();
+                            pos_now_diamante = keso;
+                            keso = keso + <0,0,0.5>;
+                            rotation rot = llEuler2Rot(<90,90,-90> * DEG_TO_RAD);
+                            llSetCameraParams([
+                                CAMERA_ACTIVE, 1,
+                                CAMERA_BEHINDNESS_ANGLE, 0.0,
+                                CAMERA_BEHINDNESS_LAG, 0.0,
+                                CAMERA_DISTANCE, 10.0,
+                                CAMERA_FOCUS, keso+(<1,0,0>*rot),
+                                CAMERA_FOCUS_LAG, 0.05 ,
+                                CAMERA_FOCUS_LOCKED, TRUE,
+                                CAMERA_FOCUS_OFFSET,<-10,-10,-10>,
+                                CAMERA_FOCUS_THRESHOLD, 0.0,
+                                CAMERA_PITCH, 0.0,
+                                CAMERA_POSITION, keso,
+                                CAMERA_POSITION_LAG, 0.0,
+                                CAMERA_POSITION_LOCKED, TRUE,
+                                CAMERA_POSITION_THRESHOLD, 0.0
+                            ]);   
+                        }
+                        llResetTime();
+                        serv=0;
+                        C++;
+                    }
+                    if(serv==0 & llGetTime() >= 1.5)
+                    {
+                        serv=1;
+                    }
                 }
             }
         }
@@ -1261,7 +1374,7 @@ default
                     }
                     else
                     {
-                        MoveTarget2(finalmeta,owner,SPEED1);
+                        MoveTarget2(finalmeta,owner,SPEED0);
                         if(llVecDist(llGetPos(),finalmeta)<=1.6)//al tras cristales usa la distancia esta
                         {
                             if(https==0)

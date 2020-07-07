@@ -74,26 +74,28 @@ int main(void)
         rgb_to_hsv(R, G, B);
 
         //printf("\nhsv: %f, %f, %f",h,s,v);
-
-        if(h>=0 && h<=20)
+        if(h!=0.0)
         {
-            puts("rojo");
+            if((h>0.0 && h<=3) || (h>=358.0 && h<=359.9))
+            {
+                puts("rojo");
+            }
+            else if(h>59 && h<=61 && s>=61)//62
+            {
+                puts("naranja");
+            }
+            else if(h>59 && h<=61)
+            {
+                puts("amarillo");
+            }
+            else if(h>90 && h<=101)
+            {
+                puts("verde");
+            }
+            printf("hsv: %f, %f, %f",h,s,v);
+            puts("\n");
+            Sleep(100);
         }
-        else if(h>20 && h<=40)
-        {
-            puts("naranja");
-        }
-        else if(h>40 && h<=63)
-        {
-            puts("amarillo");
-        }
-        else if(h>63 && h<=155)
-        {
-            puts("verde");
-        }
-        printf("hsv: %f, %f, %f",h,s,v);
-        puts("\n");
-        Sleep(1000);
     }
 
 }
