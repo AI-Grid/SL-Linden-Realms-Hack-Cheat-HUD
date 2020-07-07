@@ -887,7 +887,7 @@ default
             while(detected2--)
             {
                 key keys = llDetectedKey(detected2);
-                if(~llListFindList(llaves_diamantes, (list)[(string)keys]))
+                if(llListFindList(llaves_diamantes, (list)[(string)keys])==0xFFFFFFFF)
                 {
                     list GRZ = llGetObjectDetails(keys,[OBJECT_POS,OBJECT_CREATOR,OBJECT_OWNER]);
                     if(llList2Key(GRZ,1)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80" & llList2Key(GRZ,2)=="efd3d802-701d-48f0-93ab-fce050e6f2ac")
@@ -1017,7 +1017,7 @@ default
             {
                 vector reposicion = pos_now_diamante+<0,0,20>;
                 MoveTarget2(reposicion,owner,0.045);
-                if(llVecDist(llGetPos(),reposicion)<=1.1)
+                if(llVecDist(llGetPos(),reposicion)<=0.45)
                 {
                     jump breakXF;
                 }
@@ -1026,9 +1026,9 @@ default
             llStopMoveToTarget();
             while(TRUE)
             {
-                vector reposicion = pos_now_diamante+<0,0,1>;
+                vector reposicion = pos_now_diamante+<0,0,0>;
                 MoveTarget2(reposicion,owner,0.045);
-                if(llVecDist(llGetPos(),reposicion)<=1.0)
+                if(llVecDist(llGetPos(),reposicion)<=0.45)
                 {
                     jump breakXD;
                 }
@@ -1039,7 +1039,7 @@ default
             {
                 vector reposicion = pos_now_diamante+<0,0,20>;
                 MoveTarget2(reposicion,owner,0.045);
-                if(llVecDist(llGetPos(),reposicion)<=1.1)
+                if(llVecDist(llGetPos(),reposicion)<=0.45)
                 {
                     jump breakXDb;
                 }
@@ -1208,7 +1208,7 @@ default
                     serv=0;
                     C++;
                 }
-                if(serv==0 & llGetTime() >= 2.0)
+                if(serv==0 & llGetTime() >= 1.9)
                 {
                     serv=1;
                 }
@@ -1271,14 +1271,15 @@ default
                             }
                             if(MANUAL=="OFF")
                             {
-                                llSensor("","",(SCRIPTED),0x7FFFFFFF,PI);
                                 ohfuck=1;
+                                A+=1;
+                                llSensor("","",(SCRIPTED),0x7FFFFFFF,PI);
                                 llSetTimerEvent(0.0);
                             }
                             else
                             {
                                 A+=1;
-                                //llSleep(1.0);
+                                llSleep(0.3);
                             }
                         }
                     }

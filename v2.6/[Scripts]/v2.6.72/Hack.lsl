@@ -209,7 +209,7 @@ list POSRegion8 = [<241,130,83>,
 <199,40,67>,
 <191,0.1,67>,
 <191,-2.84533,67>,
-//<191,-3.84533,67>,
+<191,-3.84533,67>,
 <0,0,0>
 ];
 
@@ -716,7 +716,7 @@ AirGO()
             else if(~llListFindList(LR7,(list)region))
             {
                 ProLAVA(POSRegion8,SPEED_LINDEN_REALMSdou,0.6);
-                if(finalmeta==<191,-2.84533,67>|finalmeta==ZERO_VECTOR)//
+                if(finalmeta==<191,-3.84533,67>,|finalmeta==ZERO_VECTOR)//
                 {
                     finalmeta=ZERO_VECTOR;
                     A=0;

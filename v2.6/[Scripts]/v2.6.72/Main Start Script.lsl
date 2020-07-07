@@ -1203,7 +1203,7 @@ default
                 llSend("ZK=1");
                 X5();
             }
-            else if(messsage=="Manual SW")
+            else if(message=="Manual SW")
             {
                 if(MANUAL=="OFF")
                 {
