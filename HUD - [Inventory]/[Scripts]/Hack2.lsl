@@ -18,7 +18,7 @@ integer ohfuck = 0;
 integer serv = 0;
 vector pos_now_diamante;
 list LR3 = ["LR 5","LR 25","LR 45","LR 145","LR 165","LR 185"];
-string MANUAL = "OFF";
+string MANUAL = "ON";
 string AUTODM = "OFF";
 list llaves_diamantes;
 vector finalmeta;
@@ -835,7 +835,7 @@ list POSRegion12F = [
 ];
 
 integer FXDUKS;
-string xD = "Linden Realms Profesional HackV2.6:";
+string xD = "Linden Realms Professional Hack:";
 integer bahls;
 key owner;
 
@@ -1005,7 +1005,7 @@ default
             COK=llGetRegionName();
             llSetTimerEvent(DEG_TO_RAD);
             llSetTimerEvent(DEG_TO_RAD);
-            llOwnerSay("[OK AUTOSCRISTALES]");
+            llOwnerSay("[OK AUTOSCRYSTALS]");
         }
         else if(llGetSubString(str,0,5)=="MANUAL")
         {
@@ -1075,7 +1075,7 @@ default
             llSetTimerEvent(DEG_TO_RAD);
 */
             llSetTimerEvent(0.0);
-            llOwnerSay(">> Agarrrando diamante, posicion: "+(string)pos_now_diamante);
+            llOwnerSay(">> Holding diamond, position: "+(string)pos_now_diamante);
             vector reposicion = pos_now_diamante+<0,0,10>;
             vector reposicion2 = pos_now_diamante+<0,0,4>;
             while(TRUE)
@@ -1133,7 +1133,7 @@ default
                 @breakXFZ;
             }
 
-            llOwnerSay(">> Agarrando diamante, DONE.");
+            llOwnerSay(">> Grabbing diamond, DONE.");
             llSetTimerEvent(DEG_TO_RAD);
         }
         else if(str=="FXDUK")
@@ -1200,7 +1200,7 @@ default
         else if(str=="okOKERE")
         {
             FXDUKS=0;
-            llOwnerSay("-- AutoCristales reseteado, buscando posicion cercana, no se mueva por favor.");
+            llOwnerSay("- AutoCrystals reset, looking for close position, do not move please.");
             vector posicionowner = llGetPos();
             integer OKLIST = llGetListLength(pos);
             list TEST;
@@ -1220,7 +1220,7 @@ default
         }
         else if(llGetSubString(str,0,4)=="OFFSE")
         {
-            llOwnerSay("No esta funcionando. Desabilitado dentro del script.");
+            llOwnerSay("Is not working. Disabled within the script.");
         }
         else if((str=="STOPSTOP" & B%2))
         {
@@ -1230,7 +1230,7 @@ default
                 FXDUKS=0;
                 B=0;
                 B=0;
-                llOwnerSay("[DEBUG] Se ha parado el AutoCristales por el usuario, use el boton ResetPaseo para volver, en el caso de volver debe estar lo mas cerca posible.");
+                llOwnerSay("[DEBUG] The AutoCrystals has been stopped by the user, use the ResetPaseo button to return, in the case of returning it should be as close as possible.");
                 llClearCameraParams();
                 //llOwnerSay("@setenv_preset:Midday=force");
                 //llOwnerSay("@setenv_preset:Midday=force");
@@ -1343,8 +1343,8 @@ default
                     llStopMoveToTarget();
                     llStopMoveToTarget();
                     llStopMoveToTarget();
-                    llOwnerSay(xD+" Obteniendo los Lindens & Apagando script...");
-                    llOwnerSay(xD+" Puede usar el hud en otro alter y seguir. Fin del juego.");
+                    llOwnerSay(xD+" Getting the Lindens & Shutting down script ...");
+                    llOwnerSay(xD+" You can use the hud in another alter and continue. End of the game.");
                     llSend("STOPTOPE");
                     llSetTimerEvent(0.0);
                     ohfuck=0;
@@ -1369,7 +1369,7 @@ default
                         ohfuck=0;
                         llStopMoveToTarget();
                         llSend("ResetXB");
-                        llOwnerSay("Recoleccion de los diamantes: AutoCristales Finalizado.");
+                        llOwnerSay("Collection of diamonds: AutoCrystals Finished.");
                         StartServer2();
                     }
                     else

@@ -1,21 +1,51 @@
-string emailAddress = "king.erik.fenrir@gmail.com";
-key UUIDUSER = "53a0480c-485e-4129-bd4e-f2fa9183d17a";
-//////////////////////////////////////////////////////
+/*Copyright (C) https://github.com/Erik-Aranda/SL-Linden-Realms-Hack-Cheat-HUD
+===========================================================================
+                              __
+                            .d$$b
+                          .' TO$;.
+                        /  : TP._;
+                        / _.;  :Tb|
+                      /   /   ;j$j
+                  _.-'       d$$$$
+                .' ..       d$$$$;
+                /  /P'      d$$$$P. |.
+              /   '      .d$$$P' |'^'l
+            .'           `T$P^'''''  :
+        ._.'      _.'                ;
+      `-.-'.-'-' ._.       _.-'    .-'
+    `.-' _____  ._              .-'
+  -(.g$$$$$$$b.              .'
+    ''^^T$$$P^)            .(:
+      _/  -'  /.'         /:/;
+    ._.'-'`-'  ')/         /;/;
+`-.-'..--''   ' /         /  ;
+.-' ..--''        -'          :
+..--''--.-'         ('      .-(.
+  ..--''              `-'('';`
+    _.                      :
+                            ;`-
+                          :.
+                          ;*/
+
+////////////////// - //////////////////
+
+string emailAddress = "";
 
 list LR10 = ["LR 1","LR 21","LR 41","LR 141","LR 161","LR 181"];
-
 string otherscript = "Hack";
 string otherscript2 = "Hack2";
 string otherscript3 = "Hack3";
-string xD = "Linden Realms Profesional HackV2.6:";
+string xD = "Linden Realms Professional Hack:";
 string MAINTEXTURE = "8c58522d-f1a8-19a9-c4a0-d7d96c3e81f4";
 string VARIABLE3="ON";
 string ola;
 string LI2K3="ON";
-string SWMONEY = "ON";
+string SWMONEY = "OFF";
 string FORZAR="OFF";
 string IMDI="ON";
 string blockpos="OFF";
+string MANUAL = "ON";
+string AUTODM = "OFF";
 
 vector positionX;
 key owner;
@@ -27,6 +57,7 @@ vector color = <0,0.914,0.507>;
 float TIME2 = 0.1;
 float PULSE = 0.8;
 
+integer LOLX;
 integer SERVIDOR1;
 integer ST;
 integer INTEGERSB;
@@ -40,17 +71,33 @@ integer TIMES;
 DefaultK()
 {
     string nameX = llKey2Name(owner);
-    if(((llGetSubString(nameX,0,4)=="keiso")))
+    SWMONEY="OFF";
+    IMDI="ON";
+    blockpos="OFF";
+}
+Camera4(vector POSS) //Only googles
+{
+    if(llGetPermissions() & PERMISSION_CONTROL_CAMERA)
     {
-        SWMONEY="ON";
-        IMDI="ON";
-        blockpos="OFF";
-    }
-    else
-    {
-        SWMONEY="OFF";
-        IMDI="ON";
-        blockpos="OFF";
+        vector pos = POSS + <0.23,0,1>;
+        rotation rot = llEuler2Rot(<90,90,-90> * DEG_TO_RAD);
+        llClearCameraParams();
+        llSetCameraParams([
+            CAMERA_ACTIVE, 1,
+            CAMERA_BEHINDNESS_ANGLE, 0.0,
+            CAMERA_BEHINDNESS_LAG, 0.0,
+            CAMERA_DISTANCE, 10.0,
+            CAMERA_FOCUS, pos+(<1,0,0>*rot),
+            CAMERA_FOCUS_LAG, 0.05 ,
+            CAMERA_FOCUS_LOCKED, TRUE,
+            CAMERA_FOCUS_OFFSET,<-10,-10,-10>,
+            CAMERA_FOCUS_THRESHOLD, 0.0,
+            CAMERA_PITCH, 0.0,
+            CAMERA_POSITION, pos,
+            CAMERA_POSITION_LAG, 0.0,
+            CAMERA_POSITION_LOCKED, TRUE,
+            CAMERA_POSITION_THRESHOLD, 0.0
+        ]);   
     }
 }
 Camera(vector POSS)
@@ -109,11 +156,11 @@ X()
         ola="OFF";
     }
     Listens = llListen(1,"",owner,"");
-    llDialog(owner,"Linden Realms Profesional HackV2.6"+"\n"+Strings1(),
+    llDialog(owner,"Linden Realms Professional Hack"+"\n"+Strings1(),
     [
-                    "+JUMP AVI",
-            "+PUSH AVI",
-    "LISTO",
+    "+JUMP AVI",
+    "+PUSH AVI",
+    "READY",
     "UserHelp >>",
     "Config >>",
     "Reset",
@@ -127,7 +174,7 @@ X2()
     llListenRemove(Listens);
     JUMP();
     Listens = llListen(1,"",owner,"");
-    llDialog(owner,"Linden Realms Profesional HackV2.6"+"\n"+Strings2(),
+    llDialog(owner,"Linden Realms Professional Hack"+"\n"+Strings2(),
     ["<< Back"
     ,"AutoSendL$"
     ],1);
@@ -137,7 +184,7 @@ X3()
     llListenRemove(Listens);
     JUMP();
     Listens = llListen(1,"",owner,"");
-    llDialog(owner,"Linden Realms Profesional HackV2.6"+"\n"+Strings3(),
+    llDialog(owner,"Linden Realms Professional Hack"+"\n"+Strings3(),
     [
         "<< Back",
         "+X FORCED",
@@ -155,7 +202,7 @@ X4()
     llListenRemove(Listens);
     JUMP();
     Listens = llListen(1,"",owner,"");
-    llDialog(owner,"Linden Realms Profesional HackV2.6"+"\n"+Strings1(),
+    llDialog(owner,"Linden Realms Professional Hack"+"\n"+Strings1(),
     [
         "<< Back",
         "Start",
@@ -163,7 +210,10 @@ X4()
         "!ResetAll",
         ".PASSLINDENS",
         ".C.cHACK",
-        "BlockPos"
+        "BlockPos",
+        "Stop",
+        "AUTODM",
+        "Manual SW"
     ],1);    
 }
 X5()
@@ -171,7 +221,7 @@ X5()
     llListenRemove(Listens);
     JUMP();
     Listens = llListen(1,"",owner,"");
-    llDialog(owner,"Linden Realms Profesional HackV2.6"+"\n"+Strings4(),
+    llDialog(owner,"Linden Realms Professional Hack"+"\n"+Strings4(),
     [
         "<< Back",
         "Mision 1",
@@ -184,34 +234,35 @@ X5()
 string Strings1()
 {
     return(
-    "\nBotones como comandos: ON"+
-    "\nCanal de comandos en /1"+
-    "\nScript '"+otherscript3+"' Memoria: "+(string)INTEGERSC+" de 65535"+
-    "\nScript '"+otherscript2+"' Memoria: "+(string)INTEGERSB+" de 65535"+
-    "\nScript '"+otherscript+"' - Estado: "+ola+
-    "\nScript '"+otherscript+"' - Memoria: "+(string)INTEGERS+" de 65535"+
-    "\nScript 'Main'- Memoria: "+(string)llGetUsedMemory()+" de 65535"+
+    "\nhttps://github.com/Erik-Aranda/SL-Linden-Realms-Hack-Cheat-HUD\n"+
+    "\nButtons as commands: ON"+
+    "\nCommand channel in /1"+
+    "\nScript '"+otherscript3+"' Memory: "+(string)INTEGERSC+" de 65535"+
+    "\nScript '"+otherscript2+"' Memory: "+(string)INTEGERSB+" de 65535"+
+    "\nScript '"+otherscript+"' - State: "+ola+
+    "\nScript '"+otherscript+"' - Memory: "+(string)INTEGERS+" de 65535"+
+    "\nScript 'Main'- Memory: "+(string)llGetUsedMemory()+" de 65535"+
     "\nBlockPos Switch: "+blockpos
     );
 }
 string Strings2()
 {
     return(
-    "\nEnviar Lindens Automaticamente: "+SWMONEY
+    "\nSend Lindens Automatically: "+SWMONEY
     );
 }
 string Strings3()
 {
     return(
-    "\nVelocidad Hack (Funciona muy bien con JUMP): "+(string)VARIABLE3+
-    "\nPaseo de las regiones en busca de cristales: "+LI2K3+
-    "\nNo Recibir Mensajes Instantaneos De Otros Usuarios (IM's): "+IMDI
+    "\nSpeed Hack (Works great with JUMP): "+(string)VARIABLE3+
+    "\nWalk of the regions in search of crystals: "+LI2K3+
+    "\nNot Receive Instant Messages From Other Users (IM's): "+IMDI
     );
 }
 string Strings4()
 {
     return(
-    "\nForzar el paseo de las regiones en busca de cristales: "+FORZAR
+    "\nForce the walk of the regions in search of crystals: "+FORZAR
     );
 }
 
@@ -285,7 +336,7 @@ Server(integer switchsz)
         owner = llGetOwner();
         llTargetOmega(<0.1,0.0,0.0>,TWO_PI,0.1);
         DefaultK();
-        if(switchsz%2 & llKey2Name(owner)!="Reddlyy Resident")
+        if(switchsz%2)
         {
             llOwnerSay("@remoutfit:alpha=n");
             llSleep(0.1);
@@ -297,10 +348,6 @@ Server(integer switchsz)
             llOwnerSay("@detach=y");
             llSleep(0.1);
             llOwnerSay("@remoutfit:alpha=y");
-        }
-        if(llKey2Name(owner)=="Reddlyy Resident")
-        {
-            llOwnerSay("Bienvenido creador.");
         }
         llOwnerSay("@detach=y");
         llOwnerSay("@remoutfit:alpha=y");
@@ -351,8 +398,8 @@ Server(integer switchsz)
         Nice();
         llOwnerSay("@clear");
         llSetTimerEvent(0.0);
-        llOwnerSay(xD + " Recuerde de tener Always Run Enabled, RLV Enabled y Menu Desarrollo Enabled.");
-        llOwnerSay(xD + " Activar CTRL+R(Running) & CTRL+MAYUS+R(Wireframe) & 'RenderTerrainLODFactor 0' 'RenderVolumeLODFactor 0'");
+        llOwnerSay(xD + " Remember to have Always Run Enabled, RLV Enabled and Menu Development Enabled.");
+        llOwnerSay(xD + " Activate CTRL+R (Running) & CTRL+SHIFT+R (Wireframe) & 'RenderreferenceLODFactor 0' 'RenderVolumeLODFactor 0'");
         llSetText("",color,1.0);
         llSetScale(<0.10000,0.10000,0.10000>);
         llListenRemove(Listens);
@@ -397,23 +444,23 @@ Server(integer switchsz)
                     CONTROL_ML_LBUTTON ,
                     TRUE,TRUE);
                     X();
+                    llSend("HTTP-SW1");
                 }
                 else
                 {
                     ST=1;
                     llRequestPermissions(owner,0x2|0x4|0x10|0x20|0x400|0x800|0x8000);
-                    llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
+                    //llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
                 }
             }
             else
             {
                 ST=1;
                 llRequestPermissions(owner,0x2|0x4|0x10|0x20|0x400|0x800|0x8000);
-                llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
+                //llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
             }
         }
         RELEASE2=1;
-        llOwnerSay(">>>> Clickear/Start aca - HTTP Request <<<<");
     }
 }
 
@@ -485,6 +532,20 @@ Sensor(integer ooXHN)
     }
 }
 
+Sensor2(integer ooXHN)
+{
+    if(ooXHN==0)
+    {
+        ooXHNs=0;
+        llSensor("","",(SCRIPTED),20.0,PI);
+    }
+    else
+    {
+        ooXHNs = ooXHN;
+        llSensor("","",(SCRIPTED),20.0,PI);
+    }
+}
+
 MoveTarget(vector Pos,key WHOS,float SPEEDZX)
 {
     do
@@ -500,7 +561,85 @@ Important()
 {
     if(llGetScriptState(otherscript)==0)
     {
-        llOwnerSay("Debe iniciar el Hack Script. Luego intente de vuelta.");
+        llOwnerSay("You must start the Hack Script. Then try back.");
+    }
+}
+
+reset()
+{
+    llOwnerSay("Hack Script: Reseted.");
+    //llSend("BNBNX");
+    llSend("STOPSTOP2");
+    llSetTimerEvent(DEG_TO_RAD);
+    llOwnerSay("@fly=n");
+    llOwnerSay("@alwaysrun=y");
+    llOwnerSay("@tploc=y");
+    llOwnerSay("@shownametags=n");
+    TIMES=0;
+    @redoKSD;
+    if(llGetInventoryType(otherscript3) & INVENTORY_SCRIPT)
+    {
+        llSleep(0.2);
+        llSetScriptState(otherscript3,TRUE);
+        llSetScriptState(otherscript3,TRUE);
+    }
+    else
+    {
+        jump redoKSD;
+    }
+    @redoA15;
+    if(llGetInventoryType(otherscript) & INVENTORY_SCRIPT)
+    {
+        llSleep(0.2);
+        llSetScriptState(otherscript,TRUE);
+        llSetScriptState(otherscript,TRUE);
+    }
+    else
+    {
+        jump redoA15;
+    }
+    @redoA16;
+    if(llGetInventoryType(otherscript2) & INVENTORY_SCRIPT)
+    {
+        llSleep(0.2);
+        llSetScriptState(otherscript2,TRUE);
+        llSetScriptState(otherscript2,TRUE);
+    }
+    else
+    {
+        jump redoA16;
+    }
+    llResetTime();
+    llSetTimerEvent(DEG_TO_RAD);
+    llSleep(TIME2);
+    llResetOtherScript(otherscript);
+    llResetOtherScript(otherscript2);
+    if(LI2K3=="ON")
+    {
+        llSend("MSI1");
+    }
+    else
+    {
+        llSend("MSI0");
+    }
+}
+
+listo()
+{
+    if(RUN_SENSOR%2)
+    {
+        llSend("CLEANMC");
+        llSleep(1.0);
+    }
+    if(llGetScriptState(otherscript)%2)
+    {
+        llSend("STOPSTOP2");
+        SERVIDOR1=0;
+        llSend("Zss");
+    }
+    else
+    {
+        Important();
     }
 }
 
@@ -512,6 +651,8 @@ default
         {
             llMoveToTarget(positionX,0.044444444);
         }
+        llSend("AUTODM"+AUTODM);
+        llSend("MANUAL"+MANUAL);
         if(~llListFindList(LR10,(list)llGetRegionName()))
         {
             llSend("OFFCAGE");
@@ -545,18 +686,6 @@ default
             CONTROL_ML_LBUTTON ,
             TRUE,TRUE);
         }
-        /*if(llGetAgentInfo(owner) & AGENT_SITTING)
-        {
-            llSleep(4.0);
-            if(llGetAgentInfo(owner) & AGENT_SITTING)
-            {
-                llOwnerSay("@sit=force");
-                llSleep(0.05);
-                llOwnerSay("@unsit=force");
-                llOwnerSay("@unsit=force");
-                llOwnerSay("@unsit=force");
-            }
-        }*/
     }
     state_entry()
     {
@@ -588,6 +717,7 @@ default
     {
         if((str=="CAMARASENSOR"))
         {
+            LOLX=0;
             keys=NULL_KEY;
             HAHAHA=ZERO_VECTOR;
             RUN_SENSOR=1;
@@ -595,10 +725,27 @@ default
         }
         else if(str=="CAMARASENSOR")
         {
+            LOLX=0;
             keys=NULL_KEY;
             HAHAHA=ZERO_VECTOR;
             RUN_SENSOR=1;
             Sensor(0);
+        }
+        else if(str=="CAMARASENSOR2X")
+        {
+            LOLX=0;
+            keys=NULL_KEY;
+            HAHAHA=ZERO_VECTOR;
+            RUN_SENSOR=1;
+            Sensor2(0);           
+        }
+        else if(str=="CSASENSOR2")
+        {
+            LOLX=8;
+            keys=NULL_KEY;
+            HAHAHA=ZERO_VECTOR;
+            RUN_SENSOR=1;
+            Sensor2(0);           
         }
         else if(str=="STOPSSFORCE")
         {
@@ -636,82 +783,91 @@ default
             if(SWMONEY=="ON")
             {
                 string nameX = llKey2Name(owner);
-                if(((llGetSubString(nameX,0,4)=="keiso")))
-                {
-                    llSleep(8.0);
-                    llTransferLindenDollars(UUIDUSER,50);
-                    llOwnerSay(xD + " Dinero enviado automaticamente con la configuracion del HUD.");
-                    llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
-                    
-                }
-                else
-                {
-                    llOwnerSay("Transferencia de dinero automatica desactivada.");
-                }
+                llOwnerSay("Automatic money transfer disabled.");
             }
             Stop();
+        }
+        else if(str=="axwqae6e")//reset script
+        {
+            reset();
+        }
+        else if(str=="bxqwerq")//"listo"
+        {
+            listo();
         }
     }
     transaction_result(key id, integer success, string data)
     {
-        if(!success)
+        if(success)
         {
-            string nameX = llKey2Name(llGetOwnerKey(owner));
-            if(llGetSubString(nameX,0,4)=="keiso" & SWMONEY=="ON")
-            {
-                llEmail(emailAddress,"HUD Transfer Error",llGetObjectName()+": El usuario '"+llGetUsername(owner)+"' ha fallado en la transferencia de dinero.");
-            }
+            llSend("HTTP-SW5");
         }
     }
     sensor(integer detected)
     {
+        integer GOOGLE=0;
         integer XNAILS;
+        if(LOLX!=8)
+        {
+            LOLX=0;
+        }
         while(detected--)
         {
             string name = llDetectedName(detected);
-            if(name=="Goggle Rezzer")
+            if(name=="Goggle Rezzer" & LOLX==8)
             {
                 XNAILS=1;
                 keys = llDetectedKey(detected);
                 list GRZ = llGetObjectDetails(keys,[OBJECT_POS,OBJECT_OWNER,OBJECT_CREATOR]);
                 if(llList2Key(GRZ,2)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80" & llList2Key(GRZ,1)=="f2683489-f313-47ee-864b-a69754b18677")
                 {
-                    llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
                     HAHAHA=llList2Vector(GRZ,0);
-                    Camera(HAHAHA);
+                    Camera4(HAHAHA);
                     llSensorRemove();
+                    GOOGLE=1;
                 }
             }
-            if(name=="Amulet Section")//c83a29e5-a246-4356-8081-46a09c2f8a3f
+            if(name=="Amulet Section" & LOLX!=8)
             {
                 XNAILS=1;
                 keys = llDetectedKey(detected);
                 list GRZ = llGetObjectDetails(keys,[OBJECT_POS,OBJECT_OWNER,OBJECT_CREATOR]);
                 if(llList2Key(GRZ,2)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80" & llList2Key(GRZ,1)=="c83a29e5-a246-4356-8081-46a09c2f8a3f")
                 {
-                    llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
                     HAHAHA=llList2Vector(GRZ,0);
                     MoveTarget(HAHAHA+<0,0,3>,owner,2.0);
                     Camera(HAHAHA);
                     llSensorRemove();
                 }                                
             }
-            if(name=="LR - Single Tree")
+            if(name=="Amulet" & LOLX!=8)
             {
+                XNAILS=1;
+                keys = llDetectedKey(detected);
+                list GRZ = llGetObjectDetails(keys,[OBJECT_OWNER,OBJECT_CREATOR,OBJECT_POS]);
+                if(llList2Key(GRZ,0)=="f2683489-f313-47ee-864b-a69754b18677" & llList2Key(GRZ,1)=="2069bbc2-6c4d-4680-9ec0-7dfe260c2d80")
+                {
+                    HAHAHA=llList2Vector(GRZ,2);
+                    MoveTarget(HAHAHA+<0,0,3>,owner,2.0);
+                    Camera(HAHAHA);
+                    llSensorRemove();
+                }                                
+            }
+            if(name=="LR - Single Tree" & LOLX!=8)
+            {
+                LOLX=1;
                 XNAILS=1;
                 keys = llDetectedKey(detected);
                 list GRZ = llGetObjectDetails(keys,[OBJECT_POS]);
                 if((float)llVecDist((vector)llGetPos(),(vector)llList2Vector(GRZ,0))<12.0)
                 {
-                    llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
                     HAHAHA=llList2Vector(GRZ,0);
                     Camera2(HAHAHA);
                     llSensorRemove();
                 }
             }
-            if(name=="LR - Heart Tree")
+            if(name=="LR - Heart Tree" & LOLX!=8)
             {
-                llOwnerSay(">>>> Clickear aca - HTTP Request <<<<");
                 XNAILS=1;
                 keys = llDetectedKey(detected);
                 list GRZ = llGetObjectDetails(keys,[OBJECT_POS]);
@@ -723,6 +879,28 @@ default
         if(XNAILS==0 & ooXHNs==0)
         {
             Sensor(1);
+        }
+        if(XNAILS==1)
+        {
+            if(LOLX==0)
+            {
+                llSleep(1.0); //Algunos requieren mas tiempos
+            }
+            else if(LOLX==1)
+            {
+                llSleep(1.0);
+            }
+            else
+            {
+                llSleep(1.0); //Sleep        
+            }
+            llSend("HTTP-SW3");
+            if(GOOGLE==1)
+            {
+                llSend("HTTP-SW6");
+                GOOGLE=0;
+            }
+            LOLX=0;
         }
     }
     no_sensor()
@@ -765,6 +943,7 @@ default
         {
             ST=0;
             X();
+            llSend("HTTP-SW1");
         }
     }
     control(key id, integer level, integer edge)
@@ -842,14 +1021,14 @@ default
             {
                 if(SWMONEY=="ON")
                 {
-                    llOwnerSay("Enviar Lindens Automaticamente al Usuario Configurado: DESACTIVADO");
+                    llOwnerSay("Automatically Send Lindens to Configured User: OFF");
                     SWMONEY="OFF";
                     llRequestPermissions(owner,0x4|0x10|0x20|0x400|0x800|0x8000);
                     X2();
                 }
                 else
                 {
-                    llOwnerSay("Enviar Lindens Automaticamente al Usuario Configurado: ACTIVADO");
+                    llOwnerSay("Send Lindens Automatically to Configured User: ON");
                     SWMONEY="ON";
                     ST=1;
                     llRequestPermissions(owner,0x2|0x4|0x10|0x20|0x400|0x800|0x8000);
@@ -859,29 +1038,35 @@ default
             {
                 if(VARIABLE3=="ON")
                 {
-                    llOwnerSay("Speed Hack: DESACTIVADO");
+                    llOwnerSay("Speed Hack: DISABLED");
                     VARIABLE3="OFF";
                     PULSE=0.0;
                 }
                 else
                 {
-                    llOwnerSay("Speed Hack: ACTIVADO");
+                    llOwnerSay("Speed Hack: ENABLED");
                     VARIABLE3="ON";
                     PULSE=0.8;
                 }
                 X3();
             }
+            else if(message=="tx")
+            {
+                llOwnerSay("[OK]");
+                llSend("stopXD");
+                Listens = llListen(1,"",owner,"");
+            }
             else if(message=="AutoPaseo")
             {
                 if(LI2K3=="ON")
                 {
-                    llOwnerSay("Automaticante Ver Cristales Volando: DESACTIVADO");
+                    llOwnerSay("Automatically See Flying Crystals: OFF");
                     LI2K3="OFF";
                     llSend("MSI0");
                 }
                 else
                 {
-                    llOwnerSay("Automaticante Ver Cristales Volando: ACTIVADO");
+                    llOwnerSay("Automatic See Crystals Flying: ON");
                     LI2K3="ON";
                     llSend("MSI1");
                 }
@@ -889,7 +1074,7 @@ default
             }
             else if(message=="GETPosition")
             {
-                llOwnerSay("Posicion Actual: "+(string)llGetPos()+",");
+                llOwnerSay("Actual position: "+(string)llGetPos()+",");
                 X3();
             }
             else if(message=="ForzarVuelo")
@@ -897,7 +1082,7 @@ default
                 if(FORZAR=="ON")
                 {
                     llSend("STOPSTOP2");
-                    llOwnerSay("Forzar el paseo de las regiones en busca de cristales: DESACTIVADO");
+                    llOwnerSay("Force the regions walk in search of crystals: OFF");
                     FORZAR="OFF";
                     llSleep(1.0);
                     llSetScriptState(otherscript2,FALSE);
@@ -905,7 +1090,7 @@ default
                 else
                 {
                     llSetScriptState(otherscript2,TRUE);
-                    llOwnerSay("Forzar el paseo de las regiones en busca de cristales: ACTIVADO");
+                    llOwnerSay("Force the regions walk in search of crystals: ON");
                     //llSend("BNBNX");
                     FORZAR="ON";
                     llSend("OKSIOKDJAS");
@@ -914,23 +1099,9 @@ default
                 X5();                
                 llSleep(1.0);
             }
-            else if(message=="LISTO")
+            else if(message=="READY")
             {
-                if(RUN_SENSOR%2)
-                {
-                    llSend("CLEANMC");
-                    llSleep(1.0);
-                }
-                if(llGetScriptState(otherscript)%2)
-                {
-                    llSend("STOPSTOP2");
-                    SERVIDOR1=0;
-                    llSend("Zss");
-                }
-                else
-                {
-                    Important();
-                }
+                listo();
                 X();
             }
             else if(message=="+X FORCED")
@@ -1000,7 +1171,7 @@ default
             else if(message=="Mision 1")
             {
                 Important();
-                llOwnerSay("¡WARNING! Mision Seleccionada: Mission 1");
+                llOwnerSay("¡WARNING! Mission Selected: Mission 1");
                 llSend("ZK=0");
                 llSend("MASS");
                 llSend("ZK=0");
@@ -1009,7 +1180,7 @@ default
             else if(message=="Mision 2")
             {
                 Important();
-                llOwnerSay("¡WARNING! Mision Seleccionada: Mission 2");
+                llOwnerSay("¡WARNING! Mission Selected: Mission 2");
                 llSend("ZK=0");
                 llSend("MASS2");
                 llSend("ZK=0");
@@ -1018,7 +1189,7 @@ default
             else if(message=="Mision 3")
             {
                 Important();
-                llOwnerSay("¡WARNING! Mision Seleccionada: Mission 3");
+                llOwnerSay("¡WARNING! Mission Selected: Mission 3");
                 llSend("ZK=0");
                 llSend("MASS3");
                 llSend("ZK=0");
@@ -1027,23 +1198,53 @@ default
             else if(message=="Mision 4")
             {
                 Important();
-                llOwnerSay("¡WARNING! Mision Seleccionada: Mission 4");
+                llOwnerSay("¡WARNING! Mission Selected: Mission 4");
                 llSend("ZK=1");
                 llSend("MASS");
                 llSend("ZK=1");
                 X5();
             }
+            else if(message=="Manual SW")
+            {
+                if(MANUAL=="OFF")
+                {
+                    llOwnerSay("Manual ON - Diamonds focus ON");
+                    MANUAL="ON";
+                }
+                else
+                {
+                    llOwnerSay("Manual OFF - Diamonds focus OFF.");
+                    MANUAL="OFF";
+                }
+                llSend("MANUAL"+MANUAL);
+                X4();                
+            }
+            else if(message=="AUTODM")
+            {
+                if(AUTODM=="OFF")
+                {
+                    llOwnerSay("AUTODM ON - Diamonds collect auto ON.");
+                    AUTODM="ON";
+                }
+                else
+                {
+                    llOwnerSay("AUTODM OFF - Diamonds collect auto OFF.");
+                    AUTODM="OFF";
+                }
+                llSend("AUTODM"+AUTODM);
+                X4();                
+            }
             else if(message=="IMDisturb")
             {
                 if(IMDI=="OFF")
                 {
-                    llOwnerSay("Recibir Mensajes Instantaneos De Otros Usuarios (IM's): ACTIVADO");
+                    llOwnerSay("Receive Instant Messages From Other Users (IM's): ON");
                     llOwnerSay("@recvim_sec=n");
                     IMDI="ON";
                 }
                 else
                 {
-                    llOwnerSay("Recibir Mensajes Instantaneos De Otros Usuarios (IM's): DESACTIVADO");
+                    llOwnerSay("Receive Instant Messages From Other Users (IM's): DISABLED");
                     llOwnerSay("@recvim_sec=y");
                     IMDI="OFF";
                 }
@@ -1051,65 +1252,8 @@ default
             }
             else if(message=="reset"|message=="Reset")
             {
-                llOwnerSay("Hack Script: Reseted.");
-                //llSend("BNBNX");
-                llSend("STOPSTOP2");
-                if(llKey2Name(llGetOwnerKey(owner))!="Reddlyy Resident")
-                {
-                    llSetTimerEvent(DEG_TO_RAD);
-                    llOwnerSay("@fly=n");
-                    llOwnerSay("@alwaysrun=y");
-                    llOwnerSay("@tploc=y");
-                    llOwnerSay("@shownametags=n");
-                }
-                TIMES=0;
-                @redoKSD;
-                if(llGetInventoryType(otherscript3) & INVENTORY_SCRIPT)
-                {
-                    llSleep(0.2);
-                    llSetScriptState(otherscript3,TRUE);
-                    llSetScriptState(otherscript3,TRUE);
-                }
-                else
-                {
-                    jump redoKSD;
-                }
-                @redoA15;
-                if(llGetInventoryType(otherscript) & INVENTORY_SCRIPT)
-                {
-                    llSleep(0.2);
-                    llSetScriptState(otherscript,TRUE);
-                    llSetScriptState(otherscript,TRUE);
-                }
-                else
-                {
-                    jump redoA15;
-                }
-                @redoA16;
-                if(llGetInventoryType(otherscript2) & INVENTORY_SCRIPT)
-                {
-                    llSleep(0.2);
-                    llSetScriptState(otherscript2,TRUE);
-                    llSetScriptState(otherscript2,TRUE);
-                }
-                else
-                {
-                    jump redoA16;
-                }
-                llResetTime();
-                llSetTimerEvent(DEG_TO_RAD);
-                llSleep(TIME2);
-                llResetOtherScript(otherscript);
-                llResetOtherScript(otherscript2);
+                reset();
                 X();
-                if(LI2K3=="ON")
-                {
-                    llSend("MSI1");
-                }
-                else
-                {
-                    llSend("MSI0");
-                }
             }
             else if(message=="!ResetAll")
             {
@@ -1153,13 +1297,10 @@ default
             {
                 llOwnerSay("Hack Script: Started");
                 llSend("STOPSTOP2");               
-                if(llKey2Name(llGetOwnerKey(owner))!="Reddlyy Resident")
-                {
-                    llOwnerSay("@fly=n");
-                    llOwnerSay("@alwaysrun=y");
-                    llOwnerSay("@tploc=y");
-                    llOwnerSay("@shownametags=n");
-                }
+                llOwnerSay("@fly=n");
+                llOwnerSay("@alwaysrun=y");
+                llOwnerSay("@tploc=y");
+                llOwnerSay("@shownametags=n");
                 llSleep(0.2);
                 llResetTime();
                 llSetTimerEvent(DEG_TO_RAD);
